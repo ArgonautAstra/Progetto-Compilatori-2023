@@ -1,0 +1,29 @@
+	<!DOCTYPE html>
+<html>
+  	<head>
+    	<meta charset="utf-8">
+    	<title>Servizio di accesso web - Richiesta scaduta</title>
+    	<link rel="stylesheet" type="text/css" href="/idp/css/main.css">
+  	</head>
+  	
+  	<body>
+    <div class="wrapper">
+    	<div class="container">
+        	<header>
+				<img src="/idphttps://skin-new.unipa.it/images/logo.png" alt="Universit&agrave; degli Studi di Palermo">
+				<h3>Servizio di accesso web - Richiesta scaduta</h3>
+			</header>
+		
+        	<div class="content">
+<p>Potresti vedere questa pagina poiché hai premuto il tasto Indietro mentre stavi vistando un'applicazione on un sito web sicuri. Altrimenti, potresti aver inavvertitamente messo nei preferiti la pagina di accesso web invece che il reale sito web, o aver utilizzato un collegamento creato da qualcun altro che ha commesso lo stesso errore.</p><br/><p>Se non corretto, ciò potrebbe causare errori in alcuni browser o farti tornare al sito web che stavi cercando di lasciare, perciò sei stato invece indirizzato su questa pagina.</p>            </div>
+    	</div>
+
+      	<footer>
+        	<div class="container container-footer">
+          		<p class="footer-text">Universit&agrave; degli Studi di Palermo</p>
+        	</div>
+      	</footer>
+      	
+    </div>
+    </body>
+</html>
