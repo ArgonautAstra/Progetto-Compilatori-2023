@@ -17,6 +17,7 @@ number  {digit}{2}
 char    [a-z]
 CHAR    [A-Z]
 string  ({CHAR}|{char}){char}*
+book    {ROOM}{space}>{space}{digit}+
 space   [ ]
 SEP0    {space}-{space}
 /*Regular definitions:*/
@@ -27,7 +28,7 @@ ROOM    {CHAR}{char}*
 SEP2    ^!!!$
 AGENCY  \"({string})({space}*({string}))*\"
 AGCODE  {digit}{4}\/{CHAR}{2}
-BOOK    \(({ROOM}{space}>{space}{digit}+;?)+\)
+BOOK    \(({book})(;{space}{book})*\)
 
 /* -------------------------- */
 /* --- TRANSLATION RULES: --- */
