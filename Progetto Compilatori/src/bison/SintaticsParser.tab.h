@@ -55,7 +55,7 @@ extern int yydebug;
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
     NUMBER = 258,                  /* NUMBER  */
-    DATA = 259,                    /* DATA  */
+    DATE = 259,                    /* DATE  */
     SEP1 = 260,                    /* SEP1  */
     ROOM = 261,                    /* ROOM  */
     ARROW = 262,                   /* ARROW  */

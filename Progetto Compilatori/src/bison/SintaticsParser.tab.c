@@ -107,7 +107,7 @@ enum yysymbol_kind_t
   YYSYMBOL_YYerror = 1,                    /* error  */
   YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
   YYSYMBOL_NUMBER = 3,                     /* NUMBER  */
-  YYSYMBOL_DATA = 4,                       /* DATA  */
+  YYSYMBOL_DATE = 4,                       /* DATE  */
   YYSYMBOL_SEP1 = 5,                       /* SEP1  */
   YYSYMBOL_ROOM = 6,                       /* ROOM  */
   YYSYMBOL_ARROW = 7,                      /* ARROW  */
@@ -117,7 +117,9 @@ enum yysymbol_kind_t
   YYSYMBOL_BOOK = 11,                      /* BOOK  */
   YYSYMBOL_SPACE = 12,                     /* SPACE  */
   YYSYMBOL_YYACCEPT = 13,                  /* $accept  */
-  YYSYMBOL_verify = 14                     /* verify  */
+  YYSYMBOL_verify = 14,                    /* verify  */
+  YYSYMBOL_rooms = 15,                     /* rooms  */
+  YYSYMBOL_books = 16                      /* books  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -443,18 +445,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  3
+#define YYFINAL  4
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   1
+#define YYLAST   25
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  13
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  2
+#define YYNNTS  4
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  2
+#define YYNRULES  6
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  4
+#define YYNSTATES  24
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   267
@@ -504,7 +506,7 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    30,    30
+       0,    30,    30,    31,    31,    32,    32
 };
 #endif
 
@@ -520,9 +522,9 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "\"invalid token\"", "NUMBER", "DATA",
+  "\"end of file\"", "error", "\"invalid token\"", "NUMBER", "DATE",
   "SEP1", "ROOM", "ARROW", "SEP2", "AGENCY", "AGENCY_CODE", "BOOK",
-  "SPACE", "$accept", "verify", YY_NULLPTR
+  "SPACE", "$accept", "verify", "rooms", "books", YY_NULLPTR
 };
 
 static const char *
@@ -532,7 +534,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-5)
+#define YYPACT_NINF (-16)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -546,7 +548,9 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -4,    -5,     1,    -5
+      -4,    -3,     1,    -2,   -16,    -1,    -5,     2,     0,    -2,
+       3,   -16,   -16,     4,     5,     7,     6,     8,     9,    10,
+      11,    13,     0,   -16
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -554,19 +558,21 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     2,     0,     1
+       0,     0,     0,     4,     1,     0,     0,     0,     6,     4,
+       0,     2,     3,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     6,     5
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -5,    -5
+     -16,   -16,    16,   -15
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2
+       0,     2,     6,    11
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -574,31 +580,37 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       1,     3
+       1,     4,     3,     8,     5,     9,     7,    23,     0,    10,
+      16,    18,     0,    20,    14,    13,     0,    15,    17,     0,
+       0,    19,     0,    21,    22,    12
 };
 
 static const yytype_int8 yycheck[] =
 {
-       4,     0
+       4,     0,     5,     8,     6,     3,     7,    22,    -1,     9,
+       3,     3,    -1,     3,    10,    12,    -1,    12,    12,    -1,
+      -1,    12,    -1,    12,    11,     9
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     4,    14,     0
+       0,     4,    14,     5,     0,     6,    15,     7,     8,     3,
+       9,    16,    15,    12,    10,    12,     3,    12,     3,    12,
+       3,    12,    11,    16
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    13,    14
+       0,    13,    14,    15,    15,    16,    16
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1
+       0,     2,     5,     4,     0,    12,     0
 };
 
 
@@ -1061,14 +1073,26 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2: /* verify: DATA  */
+  case 2: /* verify: DATE SEP1 rooms SEP2 books  */
 #line 30 "SintaticsParser.y"
-                    {printf("avà dai");}
-#line 1068 "SintaticsParser.tab.c"
+                                        {printf(" FINITO");}
+#line 1080 "SintaticsParser.tab.c"
+    break;
+
+  case 4: /* rooms: %empty  */
+#line 31 "SintaticsParser.y"
+                                                     {printf(" STANZE");}
+#line 1086 "SintaticsParser.tab.c"
+    break;
+
+  case 6: /* books: %empty  */
+#line 32 "SintaticsParser.y"
+                                                                                                              {printf(" PRENOTAZIONI");}
+#line 1092 "SintaticsParser.tab.c"
     break;
 
 
-#line 1072 "SintaticsParser.tab.c"
+#line 1096 "SintaticsParser.tab.c"
 
       default: break;
     }
@@ -1261,22 +1285,32 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 33 "SintaticsParser.y"
+#line 35 "SintaticsParser.y"
 
 /* ------------------------------ */
 /* --- AUXILIARIES FUNCTIONS: --- */
 /* ------------------------------ */
 
-int main(int argc, char *argv[]){
+extern FILE* yyin;
 
-    printf("FUNZIONO!!!\n");
+int main(int argc, char *argv[]){
+    
+    if(argc < 2)
+        return 1;
+    
+    FILE* input_file = fopen(argv[1], "r");
+
+    if(!input_file)
+        return 1;
+
+    yyin = input_file;
     
     if(yyparse() == 0)
-        printf("boh");
+        printf("\n\n");
     
     return 0;
 }
 
 int yyerror(char *s){
-    printf("Semantics error.\n");
+    printf("Semantics error. String: %s\n", s);
 }

@@ -39,16 +39,16 @@ BOOK    \(({book})(;[ ]{book})*\)
 /* -------------------------- */
 %%
 
-{DATE}              {printf("DATA"); return DATA;}
-{SEP1}              {printf("SEP1"); return SEP1;}
-{ROOM}              {printf("ROOM"); return ROOM;}
-[ ]->[ ]            {printf("ARROW"); return ARROW;}
-{SEP2}              {printf("SEP2"); return SEP2;}
-{AGENCY}            {printf("AGENCY"); return AGENCY;}
-{AGCODE}            {printf("AGENCY_CODE"); return AGENCY_CODE;}
-{number}            {printf("NUMBER"); return NUMBER;}
-{BOOK}              {printf("BOOK"); return BOOK;}
-[ ]-[ ]             {printf("SPACE"); return SPACE;}
+{DATE}              {printf("DATE\n"); return DATE;}
+{SEP1}              {printf("SEP1\n"); return SEP1;}
+{ROOM}              {printf("ROOM\n"); return ROOM;}
+[ ]->[ ]            {printf("ARROW\n"); return ARROW;}
+{SEP2}              {printf("SEP2\n"); return SEP2;}
+{AGENCY}            {printf("AGENCY\n"); return AGENCY;}
+{AGCODE}            {printf("AGENCY_CODE\n"); return AGENCY_CODE;}
+{number}            {printf("NUMBER\n"); return NUMBER;}
+{BOOK}              {printf("BOOK\n"); return BOOK;}
+[ ]-[ ]             {printf("SPACE\n"); return SPACE;}
 
 %%
 /* ------------------------------ */

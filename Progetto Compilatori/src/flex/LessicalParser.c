@@ -787,7 +787,7 @@ case 1:
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
 #line 42 "LessicalParser.fl"
-{printf("DATA"); return DATA;}
+{printf("DATE\n"); return DATE;}
 	YY_BREAK
 case 2:
 *yy_cp = (yy_hold_char); /* undo effects of setting up yytext */
@@ -795,17 +795,17 @@ case 2:
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
 #line 43 "LessicalParser.fl"
-{printf("SEP1"); return SEP1;}
+{printf("SEP1\n"); return SEP1;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 44 "LessicalParser.fl"
-{printf("ROOM"); return ROOM;}
+{printf("ROOM\n"); return ROOM;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 45 "LessicalParser.fl"
-{printf("ARROW"); return ARROW;}
+{printf("ARROW\n"); return ARROW;}
 	YY_BREAK
 case 5:
 *yy_cp = (yy_hold_char); /* undo effects of setting up yytext */
@@ -813,32 +813,32 @@ case 5:
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
 #line 46 "LessicalParser.fl"
-{printf("SEP2"); return SEP2;}
+{printf("SEP2\n"); return SEP2;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 47 "LessicalParser.fl"
-{printf("AGENCY"); return AGENCY;}
+{printf("AGENCY\n"); return AGENCY;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 48 "LessicalParser.fl"
-{printf("AGENCY_CODE"); return AGENCY_CODE;}
+{printf("AGENCY_CODE\n"); return AGENCY_CODE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 49 "LessicalParser.fl"
-{printf("NUMBER"); return NUMBER;}
+{printf("NUMBER\n"); return NUMBER;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 50 "LessicalParser.fl"
-{printf("BOOK"); return BOOK;}
+{printf("BOOK\n"); return BOOK;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 51 "LessicalParser.fl"
-{printf("SPACE"); return SPACE;}
+{printf("SPACE\n"); return SPACE;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP

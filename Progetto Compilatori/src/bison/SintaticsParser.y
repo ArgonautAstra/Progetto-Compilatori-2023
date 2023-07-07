@@ -18,7 +18,7 @@ int yyerror(char *s);
     char* string;
 }
 %token <integer> NUMBER 
-%token <string> DATA SEP1 ROOM ARROW SEP2 AGENCY AGENCY_CODE BOOK SPACE
+%token <string> DATE SEP1 ROOM ARROW SEP2 AGENCY AGENCY_CODE BOOK SPACE
 %start verify
 
 /*Precedences:*/
@@ -27,7 +27,9 @@ int yyerror(char *s);
 /* ---------------------- */
 /* --- GRAMMAR RULES: --- */
 /* ---------------------- */
-verify:     DATA    {printf("avà dai");} ;
+verify:     DATE SEP1 rooms SEP2 books  {printf(" FINITO");} ;
+rooms:      ROOM ARROW NUMBER rooms | %empty         {printf(" STANZE");} ;
+books:      AGENCY SPACE AGENCY_CODE SPACE NUMBER SPACE NUMBER SPACE NUMBER SPACE BOOK books | %empty         {printf(" PRENOTAZIONI");} ;
 
 
 %%
@@ -35,16 +37,26 @@ verify:     DATA    {printf("avà dai");} ;
 /* --- AUXILIARIES FUNCTIONS: --- */
 /* ------------------------------ */
 
-int main(int argc, char *argv[]){
+extern FILE* yyin;
 
-    printf("FUNZIONO!!!\n");
+int main(int argc, char *argv[]){
+    
+    if(argc < 2)
+        return 1;
+    
+    FILE* input_file = fopen(argv[1], "r");
+
+    if(!input_file)
+        return 1;
+
+    yyin = input_file;
     
     if(yyparse() == 0)
-        printf("boh");
+        printf("\n\n");
     
     return 0;
 }
 
 int yyerror(char *s){
-    printf("Semantics error.\n");
+    printf("Semantics error. String: %s\n", s);
 }
