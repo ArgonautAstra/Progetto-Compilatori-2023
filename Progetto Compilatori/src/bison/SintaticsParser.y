@@ -1,8 +1,7 @@
-/* -------------------- */
-/* --- DECLARATION: --- */
-/* -------------------- */
+/* ------------------------------ */
+/* -------- DECLARATION: -------- */
+/* ------------------------------ */
 /*C segments: */
-
 %{
 #include <stdio.h>
 #include <stdlib.h> 
@@ -12,27 +11,35 @@ int yyerror(char *s);
 %}
 
 /*Token with Type:*/
-
 %union{
     int integer;
+    int* int_vec;
     char* string;
 }
 %token <integer> NUMBER 
-%token <string> DATE SEP1 ROOM ARROW SEP2 AGENCY AGCODE BOOK SPACE
+%token <int_vec> DATE 
+%token <string> SEP1 ROOM ARROW SEP2 AGENCY AGCODE MINUS PAR_OP PAR_CL MAJOR COMMA
 %start verify
 
+
+/* ------------------------------ */
+/* ------- GRAMMAR RULES: ------- */
+/* ------------------------------ */
 %% 
-/* ---------------------- */
-/* --- GRAMMAR RULES: --- */
-/* ---------------------- */
-verify:     DATE SEP1 rooms SEP2 books          {printf("FINITO\n");} ;
-rooms:      ROOM ARROW NUMBER rooms | %empty    {printf("STANZE\n");} ;
-books:      AGENCY SPACE 
-            AGCODE SPACE 
-            NUMBER SPACE 
-            NUMBER SPACE 
-            NUMBER SPACE 
-            BOOK books | %empty                 {printf("PRENOTAZIONI\n");} ;
+
+verify:         DATE SEP1 rooms SEP2 books          {printf("FINITO\n");} ;
+rooms:          ROOM ARROW NUMBER rooms 
+                | %empty                            {printf("STANZE\n");} ;
+books:          AGENCY MINUS 
+                AGCODE MINUS 
+                NUMBER MINUS 
+                NUMBER MINUS 
+                NUMBER MINUS 
+                room_list books 
+                | %empty                            {printf("PRENOTAZIONI\n");} ;
+room_list:      PAR_OP book_room PAR_CL             { } ;
+book_room:      ROOM MAJOR NUMBER COMMA book_room 
+                | ROOM MAJOR NUMBER                 { } ;
 
 
 %%
@@ -44,12 +51,9 @@ extern FILE* yyin;
 
 int main(int argc, char *argv[]){
     
-    if(argc < 2)
-        return 1;
-    
     FILE* input_file = fopen(argv[1], "r");
 
-    if(!input_file)
+    if(argc < 2 && !input_file)
         return 1;
 
     yyin = input_file;
@@ -61,5 +65,5 @@ int main(int argc, char *argv[]){
 }
 
 int yyerror(char *s){
-    printf("Semantics error. String: %s\n", s);
+    printf("Semantics error.\nString: %s\n\n", s);
 }

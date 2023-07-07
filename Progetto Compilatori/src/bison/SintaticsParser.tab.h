@@ -62,8 +62,11 @@ extern int yydebug;
     SEP2 = 263,                    /* SEP2  */
     AGENCY = 264,                  /* AGENCY  */
     AGCODE = 265,                  /* AGCODE  */
-    BOOK = 266,                    /* BOOK  */
-    SPACE = 267                    /* SPACE  */
+    MINUS = 266,                   /* MINUS  */
+    PAR_OP = 267,                  /* PAR_OP  */
+    PAR_CL = 268,                  /* PAR_CL  */
+    MAJOR = 269,                   /* MAJOR  */
+    COMMA = 270                    /* COMMA  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -72,12 +75,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 16 "SintaticsParser.y"
+#line 14 "SintaticsParser.y"
 
     int integer;
+    int* int_vec;
     char* string;
 
-#line 81 "SintaticsParser.tab.h"
+#line 85 "SintaticsParser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
