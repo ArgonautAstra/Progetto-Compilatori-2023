@@ -1,5 +1,5 @@
 #! /bin/bash
-echo "Compiling flex script"
+echo "Compiling flex script..."
 cd ./flex
 flex LessicalParser.fl
 
@@ -10,9 +10,9 @@ cd ./bison
 bison SintaticsParser.y -d
 
 cd ../
+
 echo "Compiling all files..."
 gcc ./flex/LessicalParser.c ./bison/SintaticsParser.tab.c ./bison/SintaticsParser.tab.h -o main.out
 
-
-./main.out ./input/input1.txt
+./main.out ./input/input.txt
 rm main.out ./flex/LessicalParser.c ./bison/SintaticsParser.tab.c ./bison/SintaticsParser.tab.h

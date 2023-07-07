@@ -18,5 +18,8 @@ ECHO Compiling all files...
 gcc ./flex/LessicalParser.c ./bison/SintaticsParser.tab.c ./bison/SintaticsParser.tab.h -o main.exe
 
 ECHO:
-main.exe ./input/input1.txt
-del main.exe ./flex/LessicalParser.c ./bison/SintaticsParser.tab.c ./bison/SintaticsParser.tab.h
+main.exe ./input/input.txt
+del main.exe
+del flex\LessicalParser.c
+del bison\SintaticsParser.tab.c
+del bison\SintaticsParser.tab.h

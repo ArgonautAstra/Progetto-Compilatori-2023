@@ -27,16 +27,16 @@ int yyerror(char *s);
 /* ------------------------------ */
 %% 
 
-verify:         DATE SEP1 rooms SEP2 books          {printf("FINITO\n");} ;
+verify:         DATE SEP1 rooms SEP2 books          {printf("CORRECT!!!");} ;
 rooms:          ROOM ARROW NUMBER rooms 
-                | %empty                            {printf("STANZE\n");} ;
+                | %empty                            { } ;
 books:          AGENCY MINUS 
                 AGCODE MINUS 
                 NUMBER MINUS 
                 NUMBER MINUS 
                 NUMBER MINUS 
                 room_list books 
-                | %empty                            {printf("PRENOTAZIONI\n");} ;
+                | %empty                            { } ;
 room_list:      PAR_OP book_room PAR_CL             { } ;
 book_room:      ROOM MAJOR NUMBER COMMA book_room 
                 | ROOM MAJOR NUMBER                 { } ;
