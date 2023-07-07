@@ -1,37 +1,45 @@
 /* -------------------- */
 /* --- DECLARATION: --- */
 /* -------------------- */
-/*Options: */
-%option outfile="LessicalParser.c"
-%option noyywrap
-
-digit   [0-9]
-char    [a-z]
-CHAR    [A-Z]
-string  [char|CHAR]*
-
-/*Regular definitions:*/
-DATE    ^(0[1-9]|1[0-2])-([0-9]{4})$
-SEP1    ^&&&$
-ROOM    ^([A-Z][a-z*])$
-SEP2    ^!!!$
-AGENCY  ^(\"[a-zA-Z]*\s[\w*]\")$
+/*C segments: */
 
 %{
    
 %}
 
+/*Options: */
+
+%option outfile = "LessicalParser.c"
+%option noyywrap
+
+digit   [0-9]
+char    [a-z]
+CHAR    [A-Z]
+string  ({char}|{CHAR})*
+/*Regular definitions:*/
+
+DATE    ^(0[1-9]|1[0-2])-({digit}{4})$
+SEP1    ^&&&$
+ROOM    ({CHAR}{char}*)
+SEP2    ^!!!$
+AGENCY  \"{string}\"
 
 /* -------------------------- */
 /* --- TRANSLATION RULES: --- */
 /* -------------------------- */
 %%
 
-{DATE} {printf("Date: %s", yytext);}
-{SEP1}  {printf("Puppa %s", yytext);}
+{DATE}  {printf("OK %s", yytext);}
+{SEP1}  {printf("OK %s", yytext);}
+{ROOM}  {printf("??? %s", yytext);}
+{SEP2}  {printf("OK %s", yytext);}
 {AGENCY}  {printf("Puppa2 %s", yytext);}
 
 %%
+/* ------------------------------ */
+/* --- AUXILIARIES FUNCTIONS: --- */
+/* ------------------------------ */
+
 void logger(){
     
 }

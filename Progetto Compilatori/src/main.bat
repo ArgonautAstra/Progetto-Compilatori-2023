@@ -6,7 +6,7 @@ win_flex.exe LessicalParser.fl
 
 ECHO Compiling yy file...
 gcc LessicalParser.c -o ../main.exe
-
+del LessicalParser.c
 cd ../
 
 ECHO Scanning of input...
