@@ -1,0 +1,41 @@
+/*Options: */
+%option outfile="LessicalParser.c"
+%option noyywrap
+
+/* -------------------- */
+/* --- DECLARATION: --- */
+/* -------------------- */
+/*Regular definitions:*/
+date  ^(0?[1-9]|1[0-2])-\d{4}$
+
+%{
+   
+%}
+
+/* -------------------------- */
+/* --- TRANSLATION RULES: --- */
+/* -------------------------- */
+%%
+
+{date} {fprintf(log,"Date: %s", yytext);}
+
+%%
+void logger(){
+    
+}
+
+int main (int argc, char** argv)
+{
+    --argc; ++argv;
+    if(argc > 0){
+        yyin = fopen(argv[0], "r");
+        yyout = fopen(argv[1] ,"a");
+    }
+    else yyin = stdin;
+    fprintf
+    yylex();
+    return 0;
+}
+
+
+
