@@ -5,7 +5,9 @@
 
 %{
 #include <stdio.h>
-#include "pas.tab.h" 
+#include <stdlib.h>
+#include <string.h> 
+#include "../bison/SintaticsParser.tab.h" 
 %}
 
 /*Options: */
@@ -16,12 +18,11 @@
 /*Regular definitions:*/
 
 digit   [0-9]
-number  {digit}{2}
+number  {digit}+
 char    [a-z]
 CHAR    [A-Z]
 agency  ({CHAR}|{char}){char}*
 book    {ROOM}[ ]>[ ]{digit}+
-SEP0    [ ]-[ ]
 
 /*Regular definitions based on input:*/
 
@@ -38,38 +39,20 @@ BOOK    \(({book})(;[ ]{book})*\)
 /* -------------------------- */
 %%
 
-{DATE}              {printf("OK %s", yytext);}
-{SEP1}              {printf("OK %s", yytext);}
-{ROOM}[ ]->         {printf("OK %s", yytext);}
-{SEP2}              {printf("OK %s", yytext);}
-{AGENCY}{SEP0}      |
-{AGCODE}{SEP0}      |
-{number}{SEP0}      |
-{number}{SEP0}      |
-{number}{SEP0}      |
-{BOOK}              {printf("OK %s", yytext);}
+{DATE}              {printf("DATA"); return DATA;}
+{SEP1}              {printf("SEP1"); return SEP1;}
+{ROOM}              {printf("ROOM"); return ROOM;}
+[ ]->[ ]            {printf("ARROW"); return ARROW;}
+{SEP2}              {printf("SEP2"); return SEP2;}
+{AGENCY}            {printf("AGENCY"); return AGENCY;}
+{AGCODE}            {printf("AGENCY_CODE"); return AGENCY_CODE;}
+{number}            {printf("NUMBER"); return NUMBER;}
+{BOOK}              {printf("BOOK"); return BOOK;}
+[ ]-[ ]             {printf("SPACE"); return SPACE;}
 
 %%
 /* ------------------------------ */
 /* --- AUXILIARIES FUNCTIONS: --- */
 /* ------------------------------ */
-
-void logger(){
-    
-}
-
-int main (int argc, char** argv)
-{
-    --argc; ++argv;
-    if(argc > 0){
-        yyin = fopen(argv[0], "r");
-        //yyout = fopen(argv[1] ,"a");
-    }
-    else yyin = stdin;
-    
-    yylex();
-    return 0;
-}
-
 
 
