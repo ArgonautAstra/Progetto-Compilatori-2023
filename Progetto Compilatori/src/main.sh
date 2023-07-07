@@ -5,6 +5,7 @@ flex LessicalParser.fl
 
 echo "Compiling lex.yy file"
 gcc LessicalParser.c -o ../main.out
+rm LessicalParser.c
 cd ../
 
 echo "Scanning of input1"
