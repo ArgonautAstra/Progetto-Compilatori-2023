@@ -45,7 +45,7 @@ BOOK    \(({book})(;[ ]{book})*\)
 [ ]->[ ]            {printf("ARROW\n"); return ARROW;}
 {SEP2}              {printf("SEP2\n"); return SEP2;}
 {AGENCY}            {printf("AGENCY\n"); return AGENCY;}
-{AGCODE}            {printf("AGENCY_CODE\n"); return AGENCY_CODE;}
+{AGCODE}            {printf("AGENCY_CODE\n"); return AGCODE;}
 {number}            {printf("NUMBER\n"); return NUMBER;}
 {BOOK}              {printf("BOOK\n"); return BOOK;}
 [ ]-[ ]             {printf("SPACE\n"); return SPACE;}

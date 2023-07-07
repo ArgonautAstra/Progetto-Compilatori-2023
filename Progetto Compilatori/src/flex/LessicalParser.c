@@ -823,7 +823,7 @@ YY_RULE_SETUP
 case 7:
 YY_RULE_SETUP
 #line 48 "LessicalParser.fl"
-{printf("AGENCY_CODE\n"); return AGENCY_CODE;}
+{printf("AGENCY_CODE\n"); return AGCODE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP

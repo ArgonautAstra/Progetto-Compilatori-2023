@@ -113,7 +113,7 @@ enum yysymbol_kind_t
   YYSYMBOL_ARROW = 7,                      /* ARROW  */
   YYSYMBOL_SEP2 = 8,                       /* SEP2  */
   YYSYMBOL_AGENCY = 9,                     /* AGENCY  */
-  YYSYMBOL_AGENCY_CODE = 10,               /* AGENCY_CODE  */
+  YYSYMBOL_AGCODE = 10,                    /* AGCODE  */
   YYSYMBOL_BOOK = 11,                      /* BOOK  */
   YYSYMBOL_SPACE = 12,                     /* SPACE  */
   YYSYMBOL_YYACCEPT = 13,                  /* $accept  */
@@ -506,7 +506,7 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    30,    30,    31,    31,    32,    32
+       0,    28,    28,    29,    29,    30,    35
 };
 #endif
 
@@ -523,8 +523,8 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
 static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "NUMBER", "DATE",
-  "SEP1", "ROOM", "ARROW", "SEP2", "AGENCY", "AGENCY_CODE", "BOOK",
-  "SPACE", "$accept", "verify", "rooms", "books", YY_NULLPTR
+  "SEP1", "ROOM", "ARROW", "SEP2", "AGENCY", "AGCODE", "BOOK", "SPACE",
+  "$accept", "verify", "rooms", "books", YY_NULLPTR
 };
 
 static const char *
@@ -1074,20 +1074,20 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* verify: DATE SEP1 rooms SEP2 books  */
-#line 30 "SintaticsParser.y"
-                                        {printf(" FINITO");}
+#line 28 "SintaticsParser.y"
+                                                {printf("FINITO\n");}
 #line 1080 "SintaticsParser.tab.c"
     break;
 
   case 4: /* rooms: %empty  */
-#line 31 "SintaticsParser.y"
-                                                     {printf(" STANZE");}
+#line 29 "SintaticsParser.y"
+                                                {printf("STANZE\n");}
 #line 1086 "SintaticsParser.tab.c"
     break;
 
   case 6: /* books: %empty  */
-#line 32 "SintaticsParser.y"
-                                                                                                              {printf(" PRENOTAZIONI");}
+#line 35 "SintaticsParser.y"
+                                                {printf("PRENOTAZIONI\n");}
 #line 1092 "SintaticsParser.tab.c"
     break;
 
@@ -1285,7 +1285,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 35 "SintaticsParser.y"
+#line 38 "SintaticsParser.y"
 
 /* ------------------------------ */
 /* --- AUXILIARIES FUNCTIONS: --- */

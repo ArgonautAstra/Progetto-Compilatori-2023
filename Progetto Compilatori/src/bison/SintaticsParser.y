@@ -18,18 +18,21 @@ int yyerror(char *s);
     char* string;
 }
 %token <integer> NUMBER 
-%token <string> DATE SEP1 ROOM ARROW SEP2 AGENCY AGENCY_CODE BOOK SPACE
+%token <string> DATE SEP1 ROOM ARROW SEP2 AGENCY AGCODE BOOK SPACE
 %start verify
-
-/*Precedences:*/
 
 %% 
 /* ---------------------- */
 /* --- GRAMMAR RULES: --- */
 /* ---------------------- */
-verify:     DATE SEP1 rooms SEP2 books  {printf(" FINITO");} ;
-rooms:      ROOM ARROW NUMBER rooms | %empty         {printf(" STANZE");} ;
-books:      AGENCY SPACE AGENCY_CODE SPACE NUMBER SPACE NUMBER SPACE NUMBER SPACE BOOK books | %empty         {printf(" PRENOTAZIONI");} ;
+verify:     DATE SEP1 rooms SEP2 books          {printf("FINITO\n");} ;
+rooms:      ROOM ARROW NUMBER rooms | %empty    {printf("STANZE\n");} ;
+books:      AGENCY SPACE 
+            AGCODE SPACE 
+            NUMBER SPACE 
+            NUMBER SPACE 
+            NUMBER SPACE 
+            BOOK books | %empty                 {printf("PRENOTAZIONI\n");} ;
 
 
 %%

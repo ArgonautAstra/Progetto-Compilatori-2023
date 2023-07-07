@@ -61,7 +61,7 @@ extern int yydebug;
     ARROW = 262,                   /* ARROW  */
     SEP2 = 263,                    /* SEP2  */
     AGENCY = 264,                  /* AGENCY  */
-    AGENCY_CODE = 265,             /* AGENCY_CODE  */
+    AGCODE = 265,                  /* AGCODE  */
     BOOK = 266,                    /* BOOK  */
     SPACE = 267                    /* SPACE  */
   };
