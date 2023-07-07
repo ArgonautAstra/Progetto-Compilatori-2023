@@ -355,8 +355,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 2
-#define YY_END_OF_BUFFER 3
+#define YY_NUM_RULES 4
+#define YY_END_OF_BUFFER 5
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -364,10 +364,11 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[16] =
+static const flex_int16_t yy_accept[25] =
     {   0,
-        0,    0,    3,    2,    2,    2,    2,    0,    0,    0,
-        0,    0,    0,    1,    0
+        0,    0,    5,    4,    4,    4,    4,    4,    0,    0,
+        0,    0,    0,    0,    0,    2,    0,    0,    0,    3,
+        0,    0,    1,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -375,16 +376,16 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    3,    1,    1,    1,    4,    1,    1,
+        1,    5,    1,    1,    6,    1,    1,    7,    8,    9,
+       10,   10,   10,   10,   10,   10,   10,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    3,    1,    1,    4,    5,    6,
-        7,    7,    7,    7,    7,    7,    7,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    8,
 
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,   11,    1,    1,    1,    5,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -402,37 +403,44 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[9] =
+static const YY_CHAR yy_meta[12] =
     {   0,
-        1,    1,    2,    2,    3,    3,    4,    1
+        1,    1,    1,    1,    1,    1,    2,    3,    3,    4,
+        1
     } ;
 
-static const flex_int16_t yy_base[19] =
+static const flex_int16_t yy_base[32] =
     {   0,
-        0,    0,   23,   24,    0,   19,   18,   17,   11,   10,
-        9,    8,    0,   24,   24,    7,    9,   12
+        0,    0,   36,   37,   30,   30,    0,    0,   22,   28,
+       25,   25,   27,    0,    3,   37,    0,    3,    0,   37,
+        0,    0,   37,   37,    8,   10,   13,   15,   18,   21,
+       24
     } ;
 
-static const flex_int16_t yy_def[19] =
+static const flex_int16_t yy_def[32] =
     {   0,
-       16,   16,   15,   15,   17,   18,   15,   15,   15,   15,
-       15,   15,   15,   15,    0,   15,   15,   15
+       25,   25,   24,   24,   24,   24,   26,   27,   24,   24,
+       24,   24,   24,   28,   24,   24,   29,   24,   30,   24,
+       31,   24,   24,    0,   24,   24,   24,   24,   24,   24,
+       24
     } ;
 
-static const flex_int16_t yy_nxt[33] =
+static const flex_int16_t yy_nxt[49] =
     {   0,
-       15,   14,   15,    5,    6,    7,    7,    4,    4,    4,
-        4,    8,    8,    8,    8,   13,   12,   11,   10,    9,
-        9,    9,   15,    3,   15,   15,   15,   15,   15,   15,
-       15,   15
+       24,   23,    5,    6,   20,   18,    7,    8,    4,    4,
+        4,    4,   11,   11,   11,   11,   17,   17,   17,   19,
+       19,   19,   21,   21,   21,   22,   22,   22,   16,   15,
+       14,   13,   12,   10,    9,   24,    3,   24,   24,   24,
+       24,   24,   24,   24,   24,   24,   24,   24
     } ;
 
-static const flex_int16_t yy_chk[33] =
+static const flex_int16_t yy_chk[49] =
     {   0,
-        0,   13,    0,    2,    2,    2,    2,   16,   16,   16,
-       16,   17,   17,   18,   18,   12,   11,   10,    9,    8,
-        7,    6,    3,   15,   15,   15,   15,   15,   15,   15,
-       15,   15
+        0,   22,    2,    2,   18,   15,    2,    2,   25,   25,
+       25,   25,   26,   26,   27,   27,   28,   28,   28,   29,
+       29,   29,   30,   30,   30,   31,   31,   31,   13,   12,
+       11,   10,    9,    6,    5,    3,   24,   24,   24,   24,
+       24,   24,   24,   24,   24,   24,   24,   24
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -450,19 +458,18 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "LessicalParser.fl"
-/*Options: */
 /* -------------------- */
 /* --- DECLARATION: --- */
 /* -------------------- */
+/*Options: */
 /*Regular definitions:*/
-#line 12 "LessicalParser.fl"
-   #include <stdlib.h>
-   FILE* log;
-#line 461 "LessicalParser.c"
+#line 16 "LessicalParser.fl"
+   
+#line 468 "LessicalParser.c"
 /* -------------------------- */
 /* --- TRANSLATION RULES: --- */
 /* -------------------------- */
-#line 465 "LessicalParser.c"
+#line 472 "LessicalParser.c"
 
 #define INITIAL 0
 
@@ -473,7 +480,7 @@ char *yytext;
  */
 #include <unistd.h>
 #endif
-
+    
 #ifndef YY_EXTRA_TYPE
 #define YY_EXTRA_TYPE void *
 #endif
@@ -682,10 +689,10 @@ YY_DECL
 		}
 
 	{
-#line 19 "LessicalParser.fl"
+#line 23 "LessicalParser.fl"
 
 
-#line 688 "LessicalParser.c"
+#line 695 "LessicalParser.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -713,13 +720,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 16 )
+				if ( yy_current_state >= 25 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 24 );
+		while ( yy_base[yy_current_state] != 37 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -748,15 +755,31 @@ case 1:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 21 "LessicalParser.fl"
-{fprintf(log,"Date: %s", yytext);}
+#line 25 "LessicalParser.fl"
+{printf("Date: %s", yytext);}
 	YY_BREAK
 case 2:
+*yy_cp = (yy_hold_char); /* undo effects of setting up yytext */
+(yy_c_buf_p) = yy_cp -= 1;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 23 "LessicalParser.fl"
+#line 26 "LessicalParser.fl"
+{printf("Puppa %s", yytext);}
+	YY_BREAK
+case 3:
+*yy_cp = (yy_hold_char); /* undo effects of setting up yytext */
+(yy_c_buf_p) = yy_cp -= 1;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 27 "LessicalParser.fl"
+{printf("Puppa2 %s", yytext);}
+	YY_BREAK
+case 4:
+YY_RULE_SETUP
+#line 29 "LessicalParser.fl"
 ECHO;
 	YY_BREAK
-#line 759 "LessicalParser.c"
+#line 782 "LessicalParser.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1054,7 +1077,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 16 )
+			if ( yy_current_state >= 25 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1082,11 +1105,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 16 )
+		if ( yy_current_state >= 25 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 15);
+	yy_is_jam = (yy_current_state == 24);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1764,7 +1787,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 23 "LessicalParser.fl"
+#line 29 "LessicalParser.fl"
 
 void logger(){
     
@@ -1775,10 +1798,10 @@ int main (int argc, char** argv)
     --argc; ++argv;
     if(argc > 0){
         yyin = fopen(argv[0], "r");
-        log = fopen(argv[1] ,"a");
-        /* yyout = fopen(argv[1] ,"a"); */
+        //yyout = fopen(argv[1] ,"a");
     }
     else yyin = stdin;
+    
     yylex();
     return 0;
 }

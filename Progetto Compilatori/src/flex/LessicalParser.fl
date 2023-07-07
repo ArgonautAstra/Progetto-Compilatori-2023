@@ -1,23 +1,35 @@
+/* -------------------- */
+/* --- DECLARATION: --- */
+/* -------------------- */
 /*Options: */
 %option outfile="LessicalParser.c"
 %option noyywrap
 
-/* -------------------- */
-/* --- DECLARATION: --- */
-/* -------------------- */
+digit   [0-9]
+char    [a-z]
+CHAR    [A-Z]
+string  [char|CHAR]*
+
 /*Regular definitions:*/
-date  ^(0?[1-9]|1[0-2])-\d{4}$
+DATE    ^(0[1-9]|1[0-2])-([0-9]{4})$
+SEP1    ^&&&$
+ROOM    ^([A-Z][a-z*])$
+SEP2    ^!!!$
+AGENCY  ^(\"[a-zA-Z]*\s[\w*]\")$
 
 %{
    
 %}
+
 
 /* -------------------------- */
 /* --- TRANSLATION RULES: --- */
 /* -------------------------- */
 %%
 
-{date} {fprintf(log,"Date: %s", yytext);}
+{DATE} {printf("Date: %s", yytext);}
+{SEP1}  {printf("Puppa %s", yytext);}
+{AGENCY}  {printf("Puppa2 %s", yytext);}
 
 %%
 void logger(){
@@ -29,10 +41,10 @@ int main (int argc, char** argv)
     --argc; ++argv;
     if(argc > 0){
         yyin = fopen(argv[0], "r");
-        yyout = fopen(argv[1] ,"a");
+        //yyout = fopen(argv[1] ,"a");
     }
     else yyin = stdin;
-    fprintf
+    
     yylex();
     return 0;
 }
