@@ -15,26 +15,28 @@
 digit   [0-9]
 char    [a-z]
 CHAR    [A-Z]
-string  ({char}|{CHAR})*
+string  ({CHAR}|{char}){char}*
 space   [ ]
+SEP0    {space}-{space}
 /*Regular definitions:*/
 
 DATE    ^(0[1-9]|1[0-2])-{digit}{4}$
 SEP1    ^&&&$
 ROOM    {CHAR}{char}*{space}->
 SEP2    ^!!!$
-AGENCY  \"{string}\"
+AGENCY  \"({string})({space}*({string}))*\"
+AGCODE  {digit}{4}\/{CHAR}{2}
 
 /* -------------------------- */
 /* --- TRANSLATION RULES: --- */
 /* -------------------------- */
 %%
 
-{DATE}  {printf("OK %s", yytext);}
-{SEP1}  {printf("OK %s", yytext);}
-{ROOM}  {printf("??? %s", yytext);}
-{SEP2}  {printf("OK %s", yytext);}
-{AGENCY}  {printf("Puppa2 %s", yytext);}
+{DATE}      {printf("OK %s", yytext);}
+{SEP1}      {printf("OK %s", yytext);}
+{ROOM}      {printf("OK %s", yytext);}
+{SEP2}      {printf("OK %s", yytext);}
+{AGENCY}{SEP0}{AGCODE}   {printf("OK %s", yytext);}
 
 %%
 /* ------------------------------ */

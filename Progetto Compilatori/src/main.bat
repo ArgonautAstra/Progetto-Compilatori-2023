@@ -11,5 +11,6 @@ cd ../
 
 ECHO Scanning of input...
 main.exe ./input/input1.txt ./output/output1.log
+del main.exe
 
 
