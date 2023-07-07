@@ -9,4 +9,5 @@ rm LessicalParser.c
 cd ../
 
 echo "Scanning of input1"
-./main.out ./input/test.txt ./output/test.log
+./main.out ./input/input1.txt ./output/input1.log
+rm main.out
