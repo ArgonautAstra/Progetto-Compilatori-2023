@@ -4,7 +4,8 @@
 /*C segments: */
 
 %{
-   
+#include <stdio.h>
+#include "pas.tab.h" 
 %}
 
 /*Options: */
@@ -12,24 +13,25 @@
 %option outfile = "LessicalParser.c"
 %option noyywrap
 
+/*Regular definitions:*/
+
 digit   [0-9]
 number  {digit}{2}
 char    [a-z]
 CHAR    [A-Z]
 agency  ({CHAR}|{char}){char}*
-book    {ROOM}{space}>{space}{digit}+
-space   [ ]
-SEP0    {space}-{space}
+book    {ROOM}[ ]>[ ]{digit}+
+SEP0    [ ]-[ ]
 
-/*Regular definitions:*/
+/*Regular definitions based on input:*/
 
 DATE    ^(0[1-9]|1[0-2])-{digit}{4}$
 SEP1    ^&&&$
 ROOM    {CHAR}{char}*
 SEP2    ^!!!$
-AGENCY  \"({agency})({space}*({agency}))*\"
+AGENCY  \"({agency})([ ]*({agency}))*\"
 AGCODE  {digit}{4}\/{CHAR}{2}
-BOOK    \(({book})(;{space}{book})*\)
+BOOK    \(({book})(;[ ]{book})*\)
 
 /* -------------------------- */
 /* --- TRANSLATION RULES: --- */
@@ -38,7 +40,7 @@ BOOK    \(({book})(;{space}{book})*\)
 
 {DATE}              {printf("OK %s", yytext);}
 {SEP1}              {printf("OK %s", yytext);}
-{ROOM}{space}->     {printf("OK %s", yytext);}
+{ROOM}[ ]->         {printf("OK %s", yytext);}
 {SEP2}              {printf("OK %s", yytext);}
 {AGENCY}{SEP0}      |
 {AGCODE}{SEP0}      |
