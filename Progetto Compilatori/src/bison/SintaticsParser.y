@@ -6,14 +6,14 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <string.h> 
-#include "../simboltable/hashtable.h"
+#include "../symbol_table/hashtable.h"
 
-#define SIZE 999
+
 int yylex();
-int yyerror(char *s);
+int yyerror(const char *s);
 
 int* date = NULL;
-Booked* rooms[SIZE]; 
+Booked** rooms; 
 int i = 0;
 
 void push_back(Booked* rooms[], Booked* value)
@@ -26,6 +26,8 @@ void push_back(Booked* rooms[], Booked* value)
     i++;
 }
 %}
+
+%define parse.error verbose
 
 /*Token with Type:*/
 %union{
@@ -60,9 +62,13 @@ k_book:         AGENCY MINUS
                 AGCODE MINUS 
                 NUMBER MINUS 
                 NUMBER MINUS 
-                NUMBER MINUS
+                NUMBER MINUS                        {rooms = calloc(SIZE,sizeof(Booked*));
+                                                        i=0;
+                                                    }
                 room_list                           {Group* group = create_group($1,$3,$5,$9-$7,rooms);
-                                                     insert_group(group);} ;
+                                                     insert_group(group);
+
+                                                    } ;
 
 room_list:      PAR_OP book_room PAR_CL             ;
 
@@ -92,12 +98,12 @@ int main(int argc, char *argv[]){
     yyout = output_file;
     
     if(yyparse() == 0)
-        printf("\n\n");
+        printf("finito\n");
     print_tot();
     
     return 0;
 }
 
-int yyerror(char *s){
+int yyerror(const char *s){
     printf("Semantics error.\nString: %s\n\n", s);
 }

@@ -4,7 +4,8 @@
 #include <string.h>
 
 extern FILE *yyout;
-#define HASHSIZE 127
+#define HASHSIZE 101
+#define SIZE 32
 
 typedef struct booked{
     char * name;
@@ -27,7 +28,7 @@ typedef struct group{
 } Group;
 
 /* Auxiliary Functions*/
-Group *create_group(char *name_group, char *code_group, int members, int period, Booked* rooms[]);
+Group *create_group(char *name_group, char *code_group, int members, int period,Booked** rooms);
 Room *create_room(char *name, float cost);
 Booked *create_booked(char *name, int booked);
 
@@ -37,7 +38,7 @@ unsigned int hash(char *s);
 /* HASHTABLE  (int,Group) */
 extern Group *hashtable_group[HASHSIZE];
 void insert_group(Group *group);
-Group *lookup_group(char *name_group);
+Group *lookup_group(char *code_group);
 
 /* HASHTABLE (int,Room)*/
 extern Room *hashtable_room[HASHSIZE];
