@@ -5,14 +5,6 @@
 
 extern FILE *yyout;
 #define HASHSIZE 127
-typedef struct group{
-    char *name_group;
-    char *code_group;
-    int members;
-    char *period;
-    Booked* nextroom;
-    Group *next;
-} Group;
 
 typedef struct booked{
     char * name;
@@ -22,11 +14,19 @@ typedef struct booked{
 typedef struct room{
     char *name;
     float cost;
-    Room *next;
+    struct room* next;
 } Room;
+typedef struct group{
+    char *name_group;
+    char *code_group;
+    int members;
+    char *period;
+    struct booked** nextroom;
+    struct group* next;
+} Group;
 
 /* Auxiliary Functions*/
-Group *create_group(char *name_group, char *code_group, int members, char *period, Booked rooms[]);
+Group *create_group(char *name_group, char *code_group, int members, char *period, Booked* rooms[]);
 Room *create_room(char *name, float cost);
 Booked *create_booked(char *name, int booked);
 
@@ -34,12 +34,12 @@ Booked *create_booked(char *name, int booked);
 unsigned int hash(char *s);
 
 /* HASHTABLE  (int,Group) */
-Group *hashtable_group[HASHSIZE] = {0};
+extern Group *hashtable_group[HASHSIZE];
 void insert_group(Group *group);
 Group *lookup_group(char *name_group);
 
 /* HASHTABLE (int,Room)*/
-Room *hashtable_room[HASHSIZE] = {0};
+extern Room *hashtable_room[HASHSIZE];
 void insert_room(Room *room);
 Room *lookup_room(char *name);
 

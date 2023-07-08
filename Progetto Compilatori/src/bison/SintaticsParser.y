@@ -8,11 +8,24 @@
 #include <string.h> 
 #include "../simboltable/hashtable.h"
 
+
+#define SIZE 999
 int yylex();
 int yyerror(char *s);
 
 int* date = NULL;
-Booked* rooms = NULL;
+Booked* rooms[SIZE]; 
+int i = 0;
+
+
+void push_back(Booked* rooms[], Booked* value){
+    if(i > SIZE){
+        printf("Overflow array booked");
+        exit(1);
+    }
+    rooms[i] = value;
+    i++;
+}
 %}
 
 /*Token with Type:*/
@@ -33,7 +46,7 @@ Booked* rooms = NULL;
 %% 
 
 verify:         DATE SEP1 rooms SEP2 books          {date = $1;
-                                                     if(date[0] > 0 && date[0] < 13)} ;
+                                                     if(date[0] > 0 && date[0] < 13){}} ;
                                                      
 rooms:          k_room rooms |
                 k_room
@@ -50,14 +63,13 @@ k_book:         AGENCY MINUS
                 NUMBER MINUS 
                 NUMBER MINUS                        {char period[5] = "$7-$9";
                                                      Group* group = create_group($1,$3,$5,period,rooms);
-                                                     insert_room(group);} ;
+                                                     insert_group(group);} ;
 
 room_list:      PAR_OP book_room PAR_CL             ;
 
 book_room:      ROOM MAJOR NUMBER COMMA book_room 
                 | ROOM MAJOR NUMBER                 {Booked* book_room = create_booked($1,$3);
-                                                     insert_room(book_room);
-                                                     insert_booked(rooms,book_room);} ;
+                                                     push_back(rooms, book_room);} ;
 
 
 %%
@@ -80,6 +92,7 @@ int main(int argc, char *argv[]){
     
     if(yyparse() == 0)
         printf("\n\n");
+    print_tot();
     
     return 0;
 }
