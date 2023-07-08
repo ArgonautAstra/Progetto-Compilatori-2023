@@ -94,6 +94,8 @@ float cost_calculator(Booked* rooms[], int period)
 {
     float totalcost = 0.0;
     for (int i = 0; i < sizeof(*rooms)/sizeof(rooms[0]); i++){
+        
+    
         Room *room = lookup_room(rooms[i]->name);
         if (room == NULL)
             continue;

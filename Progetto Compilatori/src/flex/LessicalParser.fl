@@ -40,7 +40,7 @@ COMMA   \;[ ]
 /* ------------------------------ */
 %%
 
-{DATE}              {int date[2];
+{DATE}              {int date[2]; 
                      date[0] = atoi(strtok(yytext,"-"));
                      date[1] = atoi(strtok(NULL,"-"));
                      yylval.int_vec = date; printf("DATE\n"); return DATE;}

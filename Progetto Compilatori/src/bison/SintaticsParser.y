@@ -61,8 +61,7 @@ k_book:         AGENCY MINUS
                 NUMBER MINUS 
                 NUMBER MINUS 
                 NUMBER MINUS
-                room_list                           {
-                                                     Group* group = create_group($1,$3,$5,$9-$7,rooms);
+                room_list                           {Group* group = create_group($1,$3,$5,$9-$7,rooms);
                                                      insert_group(group);} ;
 
 room_list:      PAR_OP book_room PAR_CL             ;
