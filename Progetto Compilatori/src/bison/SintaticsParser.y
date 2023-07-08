@@ -46,7 +46,6 @@ rooms:          k_room rooms |
 
 k_room:         ROOM ARROW NUMBER                   {Room* room = create_room($1,$3);
                                                      insert_room(room);
-                                                     printf("Trovata: %s\n", lookup_room(room->name)->name);
                                                     } ;
 
 books:          k_book books | 

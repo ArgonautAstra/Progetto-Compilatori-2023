@@ -99,7 +99,6 @@ float cost_calculator(Booked* rooms, int period)
         Room* room = lookup_room(rooms[i].name);
         if (room == NULL)
             continue;
-        //printf("Nome room: %s\t", room->name);
         totalcost += room->cost * rooms[i].booked;
     }
     totalcost *= period;
