@@ -41,6 +41,15 @@ Room *create_room(char *name, float cost)
     return room;
 }
 
+Booked *create_booked(char *name, int booked)
+{
+    Booked *room = malloc(sizeof(Booked));
+    room->name = strdup(name);
+    room->booked = booked;
+    room->next = NULL;
+    return room;
+}
+
 unsigned int hash(char *s)
 {
     int h = 0, a = 127;

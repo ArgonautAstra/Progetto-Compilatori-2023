@@ -5,9 +5,14 @@
 %{
 #include <stdio.h>
 #include <stdlib.h> 
+#include <string.h> 
+#include "../simboltable/hashtable.h"
 
 int yylex();
 int yyerror(char *s);
+
+int* date = NULL;
+Booked* rooms = NULL;
 %}
 
 /*Token with Type:*/
@@ -27,19 +32,32 @@ int yyerror(char *s);
 /* ------------------------------ */
 %% 
 
-verify:         DATE SEP1 rooms SEP2 books          {printf(,"CORRECT!!!");} ;
+verify:         DATE SEP1 rooms SEP2 books          {date = $1;
+                                                     if(date[0] > 0 && date[0] < 13)
+                                                    } ;
 rooms:          ROOM ARROW NUMBER rooms 
-                | %empty                            { } ;
+                | %empty                            {Room* room = create_room($1,$3);
+                                                     insert_room(room);
+                                                    } ;
 books:          AGENCY MINUS 
                 AGCODE MINUS 
                 NUMBER MINUS 
                 NUMBER MINUS 
                 NUMBER MINUS 
                 room_list books 
-                | %empty                            { } ;
-room_list:      PAR_OP book_room PAR_CL             { } ;
+                | %empty                            {char period[5] = "$7-$9";
+                                                     Group* group = create_group($1,$3,$5,period,rooms);
+                                                     insert_room(group);
+                                                     
+                                                    } ;
+room_list:      PAR_OP book_room PAR_CL             {
+
+                                                    } ;
 book_room:      ROOM MAJOR NUMBER COMMA book_room 
-                | ROOM MAJOR NUMBER                 { } ;
+                | ROOM MAJOR NUMBER                 {Booked* book_room = create_booked($1,$3);
+                                                     insert_room(book_room);
+                                                     insert_booked(rooms,book_room);
+                                                    } ;
 
 
 %%

@@ -53,6 +53,8 @@ Group *create_group(char *name_group, char *code_group, int members, char *perio
 
 Room *create_room(char *name, float cost);
 
+Booked *create_booked(char *name, int booked);
+
 /* HASHTABLE  (int,Group) */
 Group *hashtable_group[HASHSIZE] = {0};
 
@@ -71,3 +73,7 @@ Room *lookup_room(char *name);
 
 /* LinkedList */
 void insert_booked(Booked** booked_list, Booked *booked);
+
+void stampalista(Booked *node);
+
+void print_tot();
