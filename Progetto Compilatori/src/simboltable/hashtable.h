@@ -17,7 +17,6 @@ typedef struct group{
 typedef struct booked{
     char * name;
     int booked;
-    Booked* next;
 } Booked;
 
 typedef struct room{
