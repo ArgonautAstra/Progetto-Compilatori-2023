@@ -17,7 +17,6 @@ typedef struct group{
 typedef struct booked{
     char * name;
     int booked;
-    Booked* next;
 } Booked;
 
 typedef struct room{
@@ -27,7 +26,7 @@ typedef struct room{
 } Room;
 
 /* Auxiliary Functions*/
-Group *create_group(char *name_group, char *code_group, int members, char *period, Booked* rooms);
+Group *create_group(char *name_group, char *code_group, int members, char *period, Booked rooms[]);
 Room *create_room(char *name, float cost);
 Booked *create_booked(char *name, int booked);
 
@@ -44,9 +43,6 @@ Room *hashtable_room[HASHSIZE] = {0};
 void insert_room(Room *room);
 Room *lookup_room(char *name);
 
-/* LinkedList */
-void insert_booked(Booked** booked_list, Booked *booked);
 
 /* Print functions*/
-void stampalista(Booked *node);
 void print_tot();
