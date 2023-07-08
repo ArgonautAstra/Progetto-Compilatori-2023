@@ -144,5 +144,3 @@ void print_tot()
     }
     fprintf(yyout, "Spesa totale del albergo: %.2f\n\n", total_hotel);
 }
-
-
