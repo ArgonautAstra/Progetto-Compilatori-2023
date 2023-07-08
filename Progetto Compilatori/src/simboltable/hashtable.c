@@ -2,14 +2,14 @@
 
 /* Auxiliary Functions*/
 
-Group *create_group(char *name_group, char *code_group, int members, char *period, Booked *rooms)
+Group *create_group(char *name_group, char *code_group, int members, char *period, Booked rooms[])
 {
     Group *group = malloc(sizeof(Group));
     group->name_group = strdup(name_group);
     group->code_group = strdup(code_group);
     group->members = members;
     group->period = strdup(period);
-    group->nextroom = rooms; // Linked list of booked rooms
+    group->nextroom = rooms; // Array of booked rooms
     group->next = NULL;
     return group;
 }
@@ -86,54 +86,21 @@ Room *lookup_room(char *name)
     return NULL;
 }
 
-/* LinkedList */
-
-void insert_booked(Booked** booked_list, Booked *booked)
-{
-    Booked *curlist = *booked_list;
-    Booked *prelist = NULL;
-    Booked *newlist = booked;
-    while (curlist != NULL){
-        prelist = curlist;
-        curlist = curlist->next;
-    }
-
-    if (prelist == NULL){
-        newlist->next = booked_list;
-        *booked_list = newlist;
-    } else {
-        prelist->next = newlist;
-        newlist->next = curlist;
-    }
-}
-
 /* Print functions*/
 
-void stampalista(Booked *node)
-{
-    if (node == NULL)
-        printf("Lista vuota!\n");
-    else
-        while (node != NULL){
-            printf("name:%s, booked:%f\n", node->name, node->booked);
-            node = node->next;
-        }
-}
-
-float cost_calculator(Booked *rooms)
+float cost_calculator(Booked rooms[])
 {
     float totalcost = 0.0;
-    while (rooms != NULL){
-        Room *room = lookup_room(rooms->name);
+    for (int i = 0; i < sizeof(rooms)/sizeof(rooms[0]); i++){
+        Room *room = lookup_room(rooms[i].name);
         if (room == NULL)
             continue;
-        totalcost += room->cost * rooms->booked;
-        rooms = rooms->next;
+        totalcost += room->cost * rooms[i].booked;
     }
     return totalcost;
 }
 
-float cost_calculator_discount(Booked *rooms, int members)
+float cost_calculator_discount(Booked rooms[], int members)
 {
     float total = cost_calculator(rooms);
     if (members >= 30 && members < 50)
