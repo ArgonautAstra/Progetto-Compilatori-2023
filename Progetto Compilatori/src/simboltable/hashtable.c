@@ -116,11 +116,11 @@ float cost_calculator_discount(Booked* rooms[], int period, int members)
 }
 
 void print_group(Group* g){
-    printf("Group: %s, %s, %i, %s, pointer: %p",g->name_group,g->code_group,g->members,g->period,g->nextroom);
+    printf("Group: %s, %s, %i, %s, pointer: %p", g->name_group, g->code_group, g->members, g->period, g->nextroom);
 }
 
 void print_room(Room* r){
-    printf("Room: %s, %f, pointer: %p", r->name,r->cost,r->next);
+    printf("Room: %s, %f, pointer: %p", r->name, r->cost, r->next);
 }
 
 void print_tot()
