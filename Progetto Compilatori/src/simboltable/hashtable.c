@@ -1,6 +1,6 @@
 #include "hashtable.h"
-Room *hashtable_room[HASHSIZE] = {0};
-Group *hashtable_group[HASHSIZE] = {0};
+Room *hashtable_room[HASHSIZE] = {NULL};
+Group *hashtable_group[HASHSIZE] = {NULL};
 /* Auxiliary Functions*/
 Group *create_group(char *name_group, char *code_group, int members, char *period, Booked* rooms[])
 {
@@ -86,11 +86,31 @@ Room *lookup_room(char *name)
 }
 
 /* Print functions*/
+void print_group(Group* g){
+    printf("Group: %s, %s, %i, %s, pointer: %p",g->name_group,g->code_group,g->members,g->period,g->nextroom);
+}
+
+void print_room(Room* r){
+    printf("Room: %s, %f, pointer: %p", r->name,r->cost,r->next);
+}
+void print_booked(Booked* b){
+    printf("Booked: %s, %i", b->name,b->booked);
+}
+
+void print_hashgroup(){
+    for (size_t i = 0; i < HASHSIZE; i++)
+    {
+        print_group(hashtable_group[i]);
+    }
+    
+}
 
 float cost_calculator(Booked* rooms[])
 {
     float totalcost = 0.0;
     for (int i = 0; i < sizeof(*rooms)/sizeof(rooms[0]); i++){
+        
+    
         Room *room = lookup_room(rooms[i]->name);
         if (room == NULL)
             continue;
@@ -108,13 +128,7 @@ float cost_calculator_discount(Booked* rooms[], int members)
         total -= (total * 25) / 100;
     return total;
 }
-void print_group(Group* g){
-    printf("Group: %s, %s, %i, %s, pointer: %p",g->name_group,g->code_group,g->members,g->period,g->nextroom);
-}
 
-void print_room(Room* r){
-    printf("Room: %s, %f, pointer: %p", r->name,r->cost,r->next);
-}
 void print_tot()
 {
     float total_hotel;

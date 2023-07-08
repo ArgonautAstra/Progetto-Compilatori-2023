@@ -61,7 +61,7 @@ k_book:         AGENCY MINUS
                 AGCODE MINUS 
                 NUMBER MINUS 
                 NUMBER MINUS 
-                NUMBER MINUS                        {char period[5] = "$7-$9";
+                NUMBER MINUS                        {char* period = "";
                                                      Group* group = create_group($1,$3,$5,period,rooms);
                                                      insert_group(group);} ;
 
