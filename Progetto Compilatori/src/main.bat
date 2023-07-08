@@ -15,11 +15,8 @@ win_bison.exe SintaticsParser.y -d
 cd ../
 
 ECHO Compiling all files...
-gcc ./flex/LessicalParser.c ./bison/SintaticsParser.tab.c ./bison/SintaticsParser.tab.h -o main.exe
+gcc ./flex/LessicalParser.c ./bison/SintaticsParser.tab.c ./bison/SintaticsParser.tab.h ./simboltable/hashtable.c -o main.exe
 
 ECHO:
 main.exe ./input/input.txt
-del main.exe
-del flex\LessicalParser.c
-del bison\SintaticsParser.tab.c
-del bison\SintaticsParser.tab.h
+del main.exe flex\LessicalParser.c bison\SintaticsParser.tab.c bison\SintaticsParser.tab.h

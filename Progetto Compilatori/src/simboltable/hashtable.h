@@ -16,17 +16,18 @@ typedef struct room{
     float cost;
     struct room* next;
 } Room;
+
 typedef struct group{
     char *name_group;
     char *code_group;
     int members;
-    char *period;
+    int period;
     struct booked** nextroom;
     struct group* next;
 } Group;
 
 /* Auxiliary Functions*/
-Group *create_group(char *name_group, char *code_group, int members, char *period, Booked* rooms[]);
+Group *create_group(char *name_group, char *code_group, int members, int period, Booked* rooms[]);
 Room *create_room(char *name, float cost);
 Booked *create_booked(char *name, int booked);
 

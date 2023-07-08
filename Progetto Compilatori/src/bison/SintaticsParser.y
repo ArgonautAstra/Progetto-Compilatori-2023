@@ -8,7 +8,6 @@
 #include <string.h> 
 #include "../simboltable/hashtable.h"
 
-
 #define SIZE 999
 int yylex();
 int yyerror(char *s);
@@ -17,8 +16,8 @@ int* date = NULL;
 Booked* rooms[SIZE]; 
 int i = 0;
 
-
-void push_back(Booked* rooms[], Booked* value){
+void push_back(Booked* rooms[], Booked* value)
+{
     if(i > SIZE){
         printf("Overflow array booked");
         exit(1);
@@ -49,26 +48,29 @@ verify:         DATE SEP1 rooms SEP2 books          {date = $1;
                                                      if(date[0] > 0 && date[0] < 13){}} ;
                                                      
 rooms:          k_room rooms |
-                k_room
+                k_room                              ;
 
 k_room:         ROOM ARROW NUMBER                   {Room* room = create_room($1,$3);
                                                      insert_room(room); } ;
 
-books:          k_book room_list books | 
-                k_book room_list
+books:          k_book books | 
+                k_book                              ;
 
 k_book:         AGENCY MINUS 
                 AGCODE MINUS 
                 NUMBER MINUS 
                 NUMBER MINUS 
-                NUMBER MINUS                        {char period[5] = "$7-$9";
-                                                     Group* group = create_group($1,$3,$5,period,rooms);
+                NUMBER MINUS
+                room_list                           {
+                                                     Group* group = create_group($1,$3,$5,$9-$7,rooms);
                                                      insert_group(group);} ;
 
 room_list:      PAR_OP book_room PAR_CL             ;
 
-book_room:      ROOM MAJOR NUMBER COMMA book_room 
-                | ROOM MAJOR NUMBER                 {Booked* book_room = create_booked($1,$3);
+book_room:      k_book_room COMMA book_room |
+                k_book_room                         ;
+
+k_book_room:    ROOM MAJOR NUMBER                   {Booked* book_room = create_booked($1,$3);
                                                      push_back(rooms, book_room);} ;
 
 

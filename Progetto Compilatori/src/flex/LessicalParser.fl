@@ -44,18 +44,18 @@ COMMA   \;[ ]
                      date[0] = atoi(strtok(yytext,"-"));
                      date[1] = atoi(strtok(NULL,"-"));
                      yylval.int_vec = date; printf("DATE\n"); return DATE;}
-{SEP1}              {yylval.string = yytext; printf("SEP1\n"); return SEP1;}
-{ROOM}              {yylval.string = yytext; printf("ROOM\n"); return ROOM;}
-[ ]->[ ]            {yylval.string = yytext; printf("ARROW\n"); return ARROW;}
-{SEP2}              {yylval.string = yytext; printf("SEP2\n"); return SEP2;}
-{AGENCY}            {yylval.string = yytext; printf("AGENCY\n"); return AGENCY;}
-{AGCODE}            {yylval.string = yytext; printf("AGENCY_CODE\n"); return AGCODE;}
+{SEP1}              {yylval.string = strdup(yytext); printf("SEP1\n"); return SEP1;}
+{ROOM}              {yylval.string = strdup(yytext); printf("ROOM\n"); return ROOM;}
+[ ]->[ ]            {yylval.string = strdup(yytext); printf("ARROW\n"); return ARROW;}
+{SEP2}              {yylval.string = strdup(yytext); printf("SEP2\n"); return SEP2;}
+{AGENCY}            {yylval.string = strdup(yytext); printf("AGENCY\n"); return AGENCY;}
+{AGCODE}            {yylval.string = strdup(yytext); printf("AGENCY_CODE\n"); return AGCODE;}
 {number}            {yylval.integer = atoi(yytext); printf("NUMBER\n"); return NUMBER;}
-{PAR_OP}            {yylval.string = yytext; printf("PAR_OP\n"); return PAR_OP;}
-{PAR_CL}            {yylval.string = yytext; printf("PAR_CL\n"); return PAR_CL;}
-[ ]>[ ]             {yylval.string = yytext; printf("MAJOR\n"); return MAJOR;}
-{COMMA}             {yylval.string = yytext; printf("COMMA\n"); return COMMA;}
-[ ]-[ ]             {yylval.string = yytext; printf("MINUS\n"); return MINUS;}
+{PAR_OP}            {yylval.string = strdup(yytext); printf("PAR_OP\n"); return PAR_OP;}
+{PAR_CL}            {yylval.string = strdup(yytext); printf("PAR_CL\n"); return PAR_CL;}
+[ ]>[ ]             {yylval.string = strdup(yytext); printf("MAJOR\n"); return MAJOR;}
+{COMMA}             {yylval.string = strdup(yytext); printf("COMMA\n"); return COMMA;}
+[ ]-[ ]             {yylval.string = strdup(yytext); printf("MINUS\n"); return MINUS;}
 
 %%
 /* ------------------------------ */
