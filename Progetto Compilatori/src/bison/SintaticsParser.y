@@ -27,7 +27,7 @@ int yyerror(char *s);
 /* ------------------------------ */
 %% 
 
-verify:         DATE SEP1 rooms SEP2 books          {printf("CORRECT!!!");} ;
+verify:         DATE SEP1 rooms SEP2 books          {printf(,"CORRECT!!!");} ;
 rooms:          ROOM ARROW NUMBER rooms 
                 | %empty                            { } ;
 books:          AGENCY MINUS 
@@ -48,15 +48,17 @@ book_room:      ROOM MAJOR NUMBER COMMA book_room
 /* ------------------------------ */
 
 extern FILE* yyin;
+extern FILE* yyout;
 
 int main(int argc, char *argv[]){
     
     FILE* input_file = fopen(argv[1], "r");
-
+    FILE* output_file = fopen(argv[2],"w");
     if(argc < 2 && !input_file)
         return 1;
 
     yyin = input_file;
+    yyout = output_file;
     
     if(yyparse() == 0)
         printf("\n\n");

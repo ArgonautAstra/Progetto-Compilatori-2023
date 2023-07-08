@@ -14,5 +14,5 @@ cd ../
 echo "Compiling all files..."
 gcc ./flex/LessicalParser.c ./bison/SintaticsParser.tab.c ./bison/SintaticsParser.tab.h -o main.out
 
-./main.out ./input/input.txt
+./main.out ./input/input.txt ./output/output.log
 rm main.out ./flex/LessicalParser.c ./bison/SintaticsParser.tab.c ./bison/SintaticsParser.tab.h
