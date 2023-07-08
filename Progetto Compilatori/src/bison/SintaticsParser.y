@@ -71,7 +71,7 @@ extern FILE* yyout;
 int main(int argc, char *argv[]){
     
     FILE* input_file = fopen(argv[1], "r");
-    FILE* output_file = fopen(argv[2],"w");
+    FILE* output_file = fopen(argv[2], "w");
     if(argc < 2 && !input_file)
         return 1;
 
