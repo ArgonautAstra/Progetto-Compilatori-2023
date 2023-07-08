@@ -45,7 +45,9 @@ rooms:          k_room rooms |
                 k_room                              ;
 
 k_room:         ROOM ARROW NUMBER                   {Room* room = create_room($1,$3);
-                                                     insert_room(room); } ;
+                                                     insert_room(room);
+                                                     printf("Trovata: %s\n", lookup_room(room->name)->name);
+                                                    } ;
 
 books:          k_book books | 
                 k_book                              ;
@@ -58,7 +60,8 @@ k_book:         AGENCY MINUS
                                                         i=0;
                                                     }
                 room_list                           {Group* group = create_group($1,$3,$5,$9-$7,rooms);
-                                                     insert_group(group);    
+                                                     insert_group(group);
+                                                     
                                                     } ;
 
 room_list:      PAR_OP book_room PAR_CL             ;
@@ -66,7 +69,8 @@ room_list:      PAR_OP book_room PAR_CL             ;
 book_room:      k_book_room COMMA book_room |
                 k_book_room                         ;
 
-k_book_room:    ROOM MAJOR NUMBER                   {create_booked(&rooms[i],$1,$3);} ;
+k_book_room:    ROOM MAJOR NUMBER                   {create_booked(&rooms[i],$1,$3); i++;
+                                                    } ;
 
 
 %%

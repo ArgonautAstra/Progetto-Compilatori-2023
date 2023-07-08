@@ -70,7 +70,7 @@ Group *lookup_group(char *code_group)
 
 void insert_room(Room *room)
 {
-    if (lookup_group(room->name) != NULL)
+    if (lookup_room(room->name) != NULL)
         return;
     unsigned int key = hash(room->name);
     room->next = hashtable_room[key];
@@ -99,6 +99,7 @@ float cost_calculator(Booked* rooms, int period)
         Room* room = lookup_room(rooms[i].name);
         if (room == NULL)
             continue;
+        //printf("Nome room: %s\t", room->name);
         totalcost += room->cost * rooms[i].booked;
     }
     totalcost *= period;
