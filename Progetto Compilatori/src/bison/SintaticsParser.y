@@ -13,18 +13,10 @@ int yylex();
 int yyerror(const char *s);
 
 int* date = NULL;
-Booked** rooms; 
+Booked* rooms; 
 int i = 0;
 
-void push_back(Booked* rooms[], Booked* value)
-{
-    if(i > SIZE){
-        printf("Overflow array booked");
-        exit(1);
-    }
-    rooms[i] = value;
-    i++;
-}
+
 %}
 
 %define parse.error verbose
@@ -62,12 +54,11 @@ k_book:         AGENCY MINUS
                 AGCODE MINUS 
                 NUMBER MINUS 
                 NUMBER MINUS 
-                NUMBER MINUS                        {rooms = calloc(SIZE,sizeof(Booked*));
+                NUMBER MINUS                        {rooms = calloc(SIZE,sizeof(Booked));
                                                         i=0;
                                                     }
                 room_list                           {Group* group = create_group($1,$3,$5,$9-$7,rooms);
-                                                     insert_group(group);
-
+                                                     insert_group(group);    
                                                     } ;
 
 room_list:      PAR_OP book_room PAR_CL             ;
@@ -75,8 +66,7 @@ room_list:      PAR_OP book_room PAR_CL             ;
 book_room:      k_book_room COMMA book_room |
                 k_book_room                         ;
 
-k_book_room:    ROOM MAJOR NUMBER                   {Booked* book_room = create_booked($1,$3);
-                                                     push_back(rooms, book_room);} ;
+k_book_room:    ROOM MAJOR NUMBER                   {create_booked(&rooms[i],$1,$3);} ;
 
 
 %%
@@ -98,7 +88,7 @@ int main(int argc, char *argv[]){
     yyout = output_file;
     
     if(yyparse() == 0)
-        printf("finito\n");
+        printf("Parser OK\n");
     print_tot();
     
     return 0;

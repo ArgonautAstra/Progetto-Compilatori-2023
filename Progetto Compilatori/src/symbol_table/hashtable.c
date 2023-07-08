@@ -1,11 +1,11 @@
 #include "hashtable.h"
 
-Room *hashtable_room[HASHSIZE] = {};
-Group *hashtable_group[HASHSIZE] = {};
+Room *hashtable_room[HASHSIZE] = {0};
+Group *hashtable_group[HASHSIZE] = {0};
 
 /* Auxiliary Functions*/
 
-Group *create_group(char *name_group, char *code_group, int members, int period, Booked **rooms)
+Group *create_group(char *name_group, char *code_group, int members, int period, Booked* rooms)
 {
     Group *group = malloc(sizeof(Group));
     group->name_group = strdup(name_group);
@@ -26,12 +26,10 @@ Room *create_room(char *name, float cost)
     return room;
 }
 
-Booked *create_booked(char *name, int booked)
+void create_booked(Booked* room,char *name, int booked)
 {
-    Booked *room = malloc(sizeof(Booked));
     room->name = strdup(name);
     room->booked = booked;
-    return room;
 }
 
 /* Hash function*/
@@ -93,15 +91,15 @@ Room* lookup_room(char *name)
 
 /* Print functions*/
 
-float cost_calculator(Booked** rooms, int period)
+float cost_calculator(Booked* rooms, int period)
 {
     float totalcost = 0.0;
     for (int i = 0; i < SIZE; i++){
-        if(rooms[i] == NULL) continue;
-        Room *room = lookup_room(rooms[i]->name);
+        if(rooms[i].name == NULL) continue;
+        Room* room = lookup_room(rooms[i].name);
         if (room == NULL)
             continue;
-        totalcost += room->cost * rooms[i]->booked;
+        totalcost += room->cost * rooms[i].booked;
     }
     totalcost *= period;
     return totalcost;
@@ -116,24 +114,6 @@ float cost_calculator_discount(float total, int members)
     return total;
 }
 
-void print_booked(Booked *b)
-{
-    printf("Booked: %s, %d", b->name, b->booked);
-}
-
-void print_group(Group *g)
-{
-    printf("Group: %s, %s, %i, %s, pointer: %p,", g->name_group, g->code_group, g->members, g->period, g->nextroom);
-    printf("Array of Booked:\n");
-    for (int i = 0; i < sizeof(g->nextroom) / sizeof(g->nextroom[0]); i++)
-        print_booked(g->nextroom[i]);
-}
-
-void print_room(Room *r)
-{
-    printf("Room: %s, %f, pointer: %p", r->name, r->cost, r->next);
-}
-
 void print_tot()
 {
     float total_hotel = 0.0;
@@ -144,7 +124,6 @@ void print_tot()
         float total = cost_calculator(group->nextroom, group->period);
         fflush(stdout);
         float total_discount = cost_calculator_discount(total, group->members);
-        printf("%f,%f\n", total, total_discount);
         fprintf(yyout, "%s - %s - %d Giorni\n", group->name_group, group->code_group, group->period);
         fprintf(yyout, "Spesa totale del gruppo senza sconto: %.2f\n", total);
 
