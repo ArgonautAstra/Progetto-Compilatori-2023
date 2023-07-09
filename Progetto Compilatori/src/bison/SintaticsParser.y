@@ -38,7 +38,6 @@ int i = 0;
 %% 
 
 verify:         DATE SEP1 rooms SEP2 books          {date = $1;
-                                                     printf("Bison: %d-%d - ",date[0],date[1]);
                                                      if(date[0] < 1 || date[0] > 12)
                                                         yyerror("Mese sburrato in posizione");} ;
                                                      
@@ -46,7 +45,9 @@ rooms:          k_room rooms                        |
                 k_room                              ;
 
 k_room:         ROOM ARROW NUMBER                   {Room* room = create_room($1,$3);
-                                                     insert_room(room);} ;
+                                                     insert_room(room);
+                                                     
+                                                    } ;
 
 books:          k_book books                        | 
                 k_book                              ;

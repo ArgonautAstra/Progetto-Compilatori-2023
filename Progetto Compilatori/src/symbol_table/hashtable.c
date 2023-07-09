@@ -1,7 +1,7 @@
 #include "hashtable.h"
 
-Room *hashtable_room[HASHSIZE] = {0};
 Group *hashtable_group[HASHSIZE] = {0};
+Room* linkedlist = NULL;
 
 /* Auxiliary Functions*/
 
@@ -65,27 +65,38 @@ Group *lookup_group(char *code_group)
     return NULL;
 }
 
-/* HASHTABLE (int,Room)*/
+/* LinkedList Room*/
 
-void insert_room(Room *room)
+void insert_room(Room* room)
 {
-    if (lookup_room(room->name) != NULL)
-        return;
-    unsigned int key = hash(room->name);
-    room->next = hashtable_room[key];
-    hashtable_room[key] = room;
+    Room * curlist = linkedlist;
+    Room * prelist = NULL;
+    Room * newlist = room;
+    while(curlist != NULL && strcmp(newlist->name,curlist->name) == 1){
+        prelist = curlist;
+        curlist = curlist->next;
+    }
+
+     if(prelist == NULL){
+        newlist->next = linkedlist;
+        linkedlist = newlist;
+    }
+    else{
+        prelist->next = newlist;
+        newlist->next = curlist;
+    }
+
 }
 
-Room* lookup_room(char *name)
+Room* search_room(char *name)
 {
-    Room *room_tmp = hashtable_room[hash(name)];
-    while (room_tmp != NULL)
-    {
-        if (strcmp(room_tmp->name, name) == 0)
-            return room_tmp;
-        room_tmp = room_tmp->next;
+    Room* tmp = linkedlist;
+    while(tmp != NULL){
+        if(strcmp(tmp->name,name) == 0) return tmp;
+        tmp = tmp->next;
     }
     return NULL;
+    
 }
 
 /* Print functions*/
@@ -95,9 +106,9 @@ float cost_calculator(Booked* rooms, int period)
     float totalcost = 0.0;
     for (int i = 0; i < SIZE; i++){
         if(rooms[i].name == NULL) continue;
-        Room* room = lookup_room(rooms[i].name);
-        if (room == NULL)
-            continue;
+        Room* room = search_room(rooms[i].name);
+        if (room == NULL) yyerror("Error when trying to take the room. Check input file!");
+            
         totalcost += room->cost * rooms[i].booked;
     }
     totalcost *= period;
@@ -136,10 +147,10 @@ void print_tot()
         
     }
     fprintf(yyout, "Spesa totale del albergo: %.2f\n", total_hotel);
-    for(int i = 0; i < HASHSIZE; i++){
-        Room* room = hashtable_room[i];
-        if(room == NULL) continue;
-        free(room);
-    }
+    // for(int i = 0; i < HASHSIZE; i++){
+    //     Room* room = hashtable_room[i];
+    //     if(room == NULL) continue;
+    //     free(room);
+    // }
     fflush(yyout);
 }

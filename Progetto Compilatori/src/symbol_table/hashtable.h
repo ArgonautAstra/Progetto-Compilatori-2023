@@ -4,6 +4,7 @@
 #include <string.h>
 
 extern FILE *yyout;
+extern int yyerror(const char *s);
 #define HASHSIZE 101
 #define SIZE 32
 
@@ -40,10 +41,10 @@ extern Group *hashtable_group[HASHSIZE];
 void insert_group(Group *group);
 Group *lookup_group(char *code_group);
 
-/* HASHTABLE (int,Room)*/
-extern Room *hashtable_room[HASHSIZE];
+/* LinkedList Room*/
+extern Room* linkedlist; //Pointer to Head of list
 void insert_room(Room *room);
-Room *lookup_room(char *name);
+Room* search_room(char *name);
 
 
 /* Print functions*/

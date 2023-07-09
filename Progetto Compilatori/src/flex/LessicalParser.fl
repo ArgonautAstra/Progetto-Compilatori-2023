@@ -45,7 +45,6 @@ COMMA   \;[ ]
 {DATE}              {int date[2]; 
                      date[0] = atoi(strtok(yytext,"-"));
                      date[1] = atoi(strtok(NULL,"-"));
-                     printf("Flex: %d-%d - ",date[0],date[1]);
                      yylval.int_vec = &date;  return DATE;}
 {SEP1}              {yylval.string = strdup(yytext); return SEP1;}
 {ROOM}              {yylval.string = strdup(yytext); return ROOM;}
@@ -58,7 +57,7 @@ COMMA   \;[ ]
 {PAR_CL}            {yylval.string = strdup(yytext); return PAR_CL;}
 [ ]>[ ]             {yylval.string = strdup(yytext); return MAJOR;}
 {COMMA}             {yylval.string = strdup(yytext); return COMMA;}
-[ ]-[ ]             {yylval.string = strdup(yytext); return MINUS;}
+[ ]-[ ]          {yylval.string = strdup(yytext); return MINUS;}
 \n                  ;
 
 %%
