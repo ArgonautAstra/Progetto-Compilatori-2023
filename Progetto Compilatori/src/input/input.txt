@@ -1,9 +1,9 @@
 12-2018
 &&&
-Singola -> 700
+Singola -> 70
 Doppia -> 100
 Matrimoniale -> 90
-Tripla a           fdjkhklsf     -> 130
+Tripla -> 130
 Quadrupla -> 150
 Suite -> 150
 !!!

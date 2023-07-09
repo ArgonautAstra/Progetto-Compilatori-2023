@@ -1,20 +1,19 @@
 /* ------------------------------ */
 /* -------- DECLARATION: -------- */
 /* ------------------------------ */
-/*C segments: */
+/*C segments:*/
 %{
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> 
 #include "../bison/SintaticsParser.tab.h" 
-
 %}
 
-/*Options: */
+/*Options:*/
 %option outfile = "LessicalParser.c"
 %option noyywrap
 /*Count rows*/
-%option yylineno
+%option yylineno 
 
 /*Regular definitions:*/
 digit   [0-9]
@@ -46,24 +45,22 @@ COMMA   \;[ ]
 {DATE}              {int date[2]; 
                      date[0] = atoi(strtok(yytext,"-"));
                      date[1] = atoi(strtok(NULL,"-"));
+                     printf("Flex: %d-%d - ",date[0],date[1]);
                      yylval.int_vec = &date;  return DATE;}
-{SEP1}              {yylval.string = strdup(yytext);  return SEP1;}
-{ROOM}              {yylval.string = strdup(yytext);  return ROOM;}
-[ ]->[ ]            {yylval.string = strdup(yytext);  return ARROW;}
-{SEP2}              {yylval.string = strdup(yytext);  return SEP2;}
-{AGENCY}            {yylval.string = strdup(yytext);  return AGENCY;}
-{AGCODE}            {yylval.string = strdup(yytext);  return AGCODE;}
-{number}            {yylval.integer = atoi(yytext);   return NUMBER;}
-{PAR_OP}            {yylval.string = strdup(yytext);  return PAR_OP;}
-{PAR_CL}            {yylval.string = strdup(yytext);  return PAR_CL;}
-[ ]>[ ]             {yylval.string = strdup(yytext);  return MAJOR;}
-{COMMA}             {yylval.string = strdup(yytext);  return COMMA;}
-[ ]-[ ]             {yylval.string = strdup(yytext);  return MINUS;}
+{SEP1}              {yylval.string = strdup(yytext); return SEP1;}
+{ROOM}              {yylval.string = strdup(yytext); return ROOM;}
+[ ]->[ ]            {yylval.string = strdup(yytext); return ARROW;}
+{SEP2}              {yylval.string = strdup(yytext); return SEP2;}
+{AGENCY}            {yylval.string = strdup(yytext); return AGENCY;}
+{AGCODE}            {yylval.string = strdup(yytext); return AGCODE;}
+{number}            {yylval.integer = atoi(yytext);  return NUMBER;}
+{PAR_OP}            {yylval.string = strdup(yytext); return PAR_OP;}
+{PAR_CL}            {yylval.string = strdup(yytext); return PAR_CL;}
+[ ]>[ ]             {yylval.string = strdup(yytext); return MAJOR;}
+{COMMA}             {yylval.string = strdup(yytext); return COMMA;}
+[ ]-[ ]             {yylval.string = strdup(yytext); return MINUS;}
 \n                  ;
 
 %%
-/* ------------------------------ */
-/* --- AUXILIARIES FUNCTIONS: --- */
-/* ------------------------------ */
 
 
