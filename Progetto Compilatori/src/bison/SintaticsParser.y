@@ -9,12 +9,33 @@
 #include "../symbol_table/hashtable.h"
 
 extern int yylineno; 
+extern void yySerror(const char *s);
 int yylex();
 int yyerror(const char *s);
 
 int* date = NULL;
 Booked* rooms; 
 int i = 0;
+int days = 0;
+
+int days_month(int month){
+    switch (month) {
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+        return 30;
+        break;
+    case 2:
+        return 28;
+        break;
+    default:
+        return 31;
+        break;
+
+    }
+}
+
 %}
 
 /*Options:*/
@@ -37,9 +58,16 @@ int i = 0;
 /* ------------------------------ */
 %% 
 
-verify:         DATE SEP1 rooms SEP2 books          {date = $1;
-                                                     if(date[0] < 1 || date[0] > 12)
-                                                        yyerror("Mese sburrato in posizione");} ;
+verify:         DATE                                {date = $1;
+                                                     if(date[0] < 1 || date[0] > 12){
+                                                        yySerror("Invalid Month");
+                                                     }
+                                                     days = days_month(date[0]);
+                                                     
+                                                    } 
+                SEP1 rooms SEP2 books          
+
+
                                                      
 rooms:          k_room rooms                        |
                 k_room                              ;
@@ -57,7 +85,13 @@ k_book:         AGENCY MINUS
                 NUMBER MINUS 
                 NUMBER MINUS 
                 NUMBER MINUS                        {rooms = calloc(SIZE,sizeof(Booked)); i=0;}
-                room_list                           {Group* group = create_group($1,$3,$5,$9-$7,rooms);
+                room_list                           {
+                                                        
+                                                        int period = $9-$7;
+                                                        if(period < 0 || period > days)
+                                                            yySerror("Period minor than 0 or greater than days of the month");
+
+                                                    Group* group = create_group($1,$3,$5,period,rooms);
                                                      insert_group(group);} ;
 
 room_list:      PAR_OP book_room PAR_CL             ;
@@ -99,5 +133,5 @@ int main(int argc, char *argv[]){
 
 int yyerror(const char *s){
     printf("Semantics error on line: %d -> Error: %s\n\n", yylineno, s);
-    exit(1);
+    exit(32);
 }

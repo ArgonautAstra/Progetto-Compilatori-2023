@@ -107,7 +107,7 @@ float cost_calculator(Booked* rooms, int period)
     for (int i = 0; i < SIZE; i++){
         if(rooms[i].name == NULL) continue;
         Room* room = search_room(rooms[i].name);
-        if (room == NULL) yyerror("Error when trying to take the room. Check input file!");
+        if (room == NULL) yySerror("Check rooms on input file!");
             
         totalcost += room->cost * rooms[i].booked;
     }
@@ -153,4 +153,11 @@ void print_tot()
     //     free(room);
     // }
     fflush(yyout);
+}
+
+void yySerror(const char *s){
+    printf("Semantic Error on line %d -> %s\n",yylineno,s);
+    fclose(yyin);
+    fclose(yyout);
+    exit(32);
 }

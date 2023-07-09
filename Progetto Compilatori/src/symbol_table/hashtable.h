@@ -4,6 +4,8 @@
 #include <string.h>
 
 extern FILE *yyout;
+extern FILE* yyin;
+extern int yylineno;
 extern int yyerror(const char *s);
 #define HASHSIZE 101
 #define SIZE 32
@@ -49,3 +51,5 @@ Room* search_room(char *name);
 
 /* Print functions*/
 void print_tot();
+/* Semantic error*/
+void yySerror(const char* s);
