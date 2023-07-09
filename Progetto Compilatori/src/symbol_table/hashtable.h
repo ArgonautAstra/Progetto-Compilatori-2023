@@ -51,5 +51,6 @@ Room* search_room(char *name);
 
 /* Print functions*/
 void print_tot();
+
 /* Semantic error*/
 void yySerror(const char* s);

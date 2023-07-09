@@ -1,4 +1,4 @@
-13-2018
+15-2018
 &&&
 Singola -> 70
 Doppia -> 100
@@ -6,13 +6,12 @@ Matrimoniale -> 90
 Tripla -> 130
 Quadrupla -> 150
 Suite -> 150
-Autistic -> 300
 !!!
-"Alpitour" - 3425/AT - 30 - 02 - 06 - (Singola > 3; Doppia > 5; Matrimonialedasdasdasads  > 4; Tripla > 3)
+"Alpitour" - 3425/AT - 30 - 02 - 06 - (Singola > 3; Doppia > 5; Matrimoniale > 4; Tripla > 3)
 "Eden viaggi" - 4231/EV - 54 - 04 - 09 - (Singola > 8; Doppia > 8; Matrimoniale > 9; Quadrupla > 3)
 "Luxury Travel" - 2312/LT - 20 - 10 - 17 - (Suite > 5; Matrimoniale > 5)
 "I grandi viaggi" - 5410/GV - 51 - 18 - 22 - (Singola > 15; Matrimoniale > 12; Tripla > 4)
 "Luxury Travel" - 2315/LT - 40 - 20 - 30 - (Singola > 12; Matrimoniale > 9; Suite > 4)
-"Pippo baudo" - 3232/PB - 80 - 04 - 09 - (Singola > 8; Doppia > 8; Tripla > 9; Matrimoniale > 10; Quadrupla > 30 ; Suite > 15)
-"Claudio Kokko" - 4585/CK - 80 - 04 - 09 - (Singola > 8; Doppia > 8; Tripla > 9; Matrimoniale > 10; Quadrupla > 30 ; Suite > 15)
-"Negries" - 1236/NG - 12 - 04 - 09 - (Autistic > 12; Suite > 3)
+"Alpitour" - 3232/AT - 80 - 04 - 09 - (Singola > 8; Doppia > 8; Tripla > 9; Matrimoniale > 10; Quadrupla > 30 ; Suite > 15)
+"I grandi viaggi" - 4585/GV - 80 - 04 - 09 - (Singola > 8; Doppia > 8; Tripla > 9; Matrimoniale > 10; Quadrupla > 30 ; Suite > 15)
+"Eden viaggi" - 1236/EV - 12 - 04 - 09 - (Doppia > 2; Tripla > 1; Suite > 3)

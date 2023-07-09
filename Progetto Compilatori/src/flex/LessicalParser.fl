@@ -57,9 +57,7 @@ COMMA   \;[ ]
 {PAR_CL}            {yylval.string = strdup(yytext); return PAR_CL;}
 [ ]>[ ]             {yylval.string = strdup(yytext); return MAJOR;}
 {COMMA}             {yylval.string = strdup(yytext); return COMMA;}
-[ ]-[ ]          {yylval.string = strdup(yytext); return MINUS;}
+[ ]-[ ]             {yylval.string = strdup(yytext); return MINUS;}
 \n                  ;
 
 %%
-
-

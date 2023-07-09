@@ -56,8 +56,7 @@ void insert_group(Group *group)
 Group *lookup_group(char *code_group)
 {
     Group *group_tmp = hashtable_group[hash(code_group)];
-    while (group_tmp != NULL)
-    {
+    while (group_tmp != NULL){
         if (strcmp(group_tmp->code_group, code_group) == 0)
             return group_tmp;
         group_tmp = group_tmp->next;
@@ -76,12 +75,10 @@ void insert_room(Room* room)
         prelist = curlist;
         curlist = curlist->next;
     }
-
-     if(prelist == NULL){
+    if(prelist == NULL){
         newlist->next = linkedlist;
         linkedlist = newlist;
-    }
-    else{
+    } else {
         prelist->next = newlist;
         newlist->next = curlist;
     }
@@ -92,11 +89,11 @@ Room* search_room(char *name)
 {
     Room* tmp = linkedlist;
     while(tmp != NULL){
-        if(strcmp(tmp->name,name) == 0) return tmp;
+        if(strcmp(tmp->name,name) == 0) 
+            return tmp;
         tmp = tmp->next;
     }
     return NULL;
-    
 }
 
 /* Print functions*/
@@ -105,9 +102,13 @@ float cost_calculator(Booked* rooms, int period)
 {
     float totalcost = 0.0;
     for (int i = 0; i < SIZE; i++){
-        if(rooms[i].name == NULL) continue;
+        if(rooms[i].name == NULL) 
+            continue;
+
         Room* room = search_room(rooms[i].name);
-        if (room == NULL) yySerror("Check rooms on input file!");
+
+        if (room == NULL) 
+            yySerror("Check rooms on input file!");
             
         totalcost += room->cost * rooms[i].booked;
     }
@@ -127,26 +128,30 @@ float cost_calculator_discount(float total, int members)
 void print_tot()
 {
     float total_hotel = 0.0;
-    for (int i = 0; i < HASHSIZE; i++)
-    {
+    for (int i = 0; i < HASHSIZE; i++){
         Group *group = hashtable_group[i];
-        if (group == NULL) continue;
+
+        if (group == NULL) 
+            continue;
+
         float total = cost_calculator(group->nextroom, group->period);
         fflush(stdout);
         float total_discount = cost_calculator_discount(total, group->members);
+
         fprintf(yyout, "%s - %s - %d Giorni\n", group->name_group, group->code_group, group->period);
         fprintf(yyout, "Spesa totale del gruppo senza sconto: %.2f\n", total);
 
         if (total != total_discount)
             fprintf(yyout, "Spesa totale del gruppo con sconto: %.2f\n", total_discount);
         total_hotel += total_discount;
+
         free(group->nextroom);
         free(group);
 
         fprintf(yyout, "\n----------\n\n");
-        
     }
     fprintf(yyout, "Spesa totale del albergo: %.2f\n", total_hotel);
+
     while(linkedlist != NULL){
         Room* room = linkedlist;
         free(room);
@@ -156,8 +161,8 @@ void print_tot()
 }
 
 void yySerror(const char *s){
-    printf("Semantic Error on line %d -> %s\n",yylineno,s);
+    printf("\nSemantic Error on line: %.2d -> Error: %s.",yylineno,s);
     fclose(yyin);
     fclose(yyout);
-    exit(32);
+    exit(-1);
 }

@@ -13,10 +13,10 @@ extern void yySerror(const char *s);
 int yylex();
 int yyerror(const char *s);
 
-int* date = NULL;
 Booked* rooms; 
 int i = 0;
 int days = 0;
+int* date = NULL;
 
 int days_month(int month){
     switch (month) {
@@ -32,10 +32,8 @@ int days_month(int month){
     default:
         return 31;
         break;
-
     }
 }
-
 %}
 
 /*Options:*/
@@ -59,23 +57,16 @@ int days_month(int month){
 %% 
 
 verify:         DATE                                {date = $1;
-                                                     if(date[0] < 1 || date[0] > 12){
+                                                     if(date[0] < 1 || date[0] > 12)
                                                         yySerror("Invalid Month");
-                                                     }
-                                                     days = days_month(date[0]);
-                                                     
-                                                    } 
+                                                     days = days_month(date[0]); } 
                 SEP1 rooms SEP2 books          
-
-
-                                                     
+                
 rooms:          k_room rooms                        |
                 k_room                              ;
 
 k_room:         ROOM ARROW NUMBER                   {Room* room = create_room($1,$3);
-                                                     insert_room(room);
-                                                     
-                                                    } ;
+                                                     insert_room(room);} ;
 
 books:          k_book books                        | 
                 k_book                              ;
@@ -85,13 +76,12 @@ k_book:         AGENCY MINUS
                 NUMBER MINUS 
                 NUMBER MINUS 
                 NUMBER MINUS                        {rooms = calloc(SIZE,sizeof(Booked)); i=0;}
-                room_list                           {
-                                                        
-                                                        int period = $9-$7;
-                                                        if(period < 0 || period > days)
-                                                            yySerror("Period minor than 0 or greater than days of the month");
-
-                                                    Group* group = create_group($1,$3,$5,period,rooms);
+                room_list                           {int period = $9-$7;
+                                                     if($7 < 1 || $9 > days)
+                                                        yySerror("Days of period exceed (greater or lower) the days of the month");
+                                                     if(period < 0)
+                                                        yySerror("Days of period are inverted");
+                                                     Group* group = create_group($1,$3,$5,period,rooms);
                                                      insert_group(group);} ;
 
 room_list:      PAR_OP book_room PAR_CL             ;
@@ -121,17 +111,18 @@ int main(int argc, char *argv[]){
     yyin = input_file;
     yyout = output_file;
     
-    if(yyparse() == 0)
-        printf("Parser OK\n");
+    if(yyparse() == 0){};
     print_tot();
 
     fclose(input_file);
     fclose(output_file);
+    
+    printf("\nParser OK. ");
 
     return 0;
 }
 
 int yyerror(const char *s){
-    printf("Semantics error on line: %d -> Error: %s\n\n", yylineno, s);
-    exit(32);
+    printf("\nSintatic Error on line: %.2d -> Error: %s.", yylineno, s);
+    exit(-1);
 }
