@@ -147,11 +147,11 @@ void print_tot()
         
     }
     fprintf(yyout, "Spesa totale del albergo: %.2f\n", total_hotel);
-    // for(int i = 0; i < HASHSIZE; i++){
-    //     Room* room = hashtable_room[i];
-    //     if(room == NULL) continue;
-    //     free(room);
-    // }
+    while(linkedlist != NULL){
+        Room* room = linkedlist;
+        free(room);
+        linkedlist = linkedlist->next;
+    }
     fflush(yyout);
 }
 
