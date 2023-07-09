@@ -7,11 +7,14 @@
 #include <stdlib.h>
 #include <string.h> 
 #include "../bison/SintaticsParser.tab.h" 
+
 %}
 
 /*Options: */
 %option outfile = "LessicalParser.c"
 %option noyywrap
+/*Count rows*/
+%option yylineno
 
 /*Regular definitions:*/
 digit   [0-9]
@@ -23,7 +26,7 @@ year    {digit}{4}
 
 DATE    {month}-{year}
 SEP1    ^&&&$
-ROOM    {CHAR}{char}*
+ROOM    ({CHAR}{char}*)([ ]*({char}))*
 SEP2    ^!!!$
 
 agency  ({CHAR}|{char}){char}*
@@ -43,7 +46,7 @@ COMMA   \;[ ]
 {DATE}              {int date[2]; 
                      date[0] = atoi(strtok(yytext,"-"));
                      date[1] = atoi(strtok(NULL,"-"));
-                     yylval.int_vec = date;  return DATE;}
+                     yylval.int_vec = &date;  return DATE;}
 {SEP1}              {yylval.string = strdup(yytext);  return SEP1;}
 {ROOM}              {yylval.string = strdup(yytext);  return ROOM;}
 [ ]->[ ]            {yylval.string = strdup(yytext);  return ARROW;}
@@ -56,7 +59,7 @@ COMMA   \;[ ]
 [ ]>[ ]             {yylval.string = strdup(yytext);  return MAJOR;}
 {COMMA}             {yylval.string = strdup(yytext);  return COMMA;}
 [ ]-[ ]             {yylval.string = strdup(yytext);  return MINUS;}
-\n 
+\n                  ;
 
 %%
 /* ------------------------------ */

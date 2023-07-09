@@ -48,7 +48,6 @@ void insert_group(Group *group)
 {
     if (lookup_group(group->code_group) != NULL)
         return;
-    // printf("Group: %s,%s\n", group->name_group,group->code_group);
     unsigned int key = hash(group->code_group);
     group->next = hashtable_group[key];
     hashtable_group[key] = group;
@@ -130,10 +129,17 @@ void print_tot()
         if (total != total_discount)
             fprintf(yyout, "Spesa totale del gruppo con sconto: %.2f\n", total_discount);
         total_hotel += total_discount;
+        free(group->nextroom);
+        free(group);
 
         fprintf(yyout, "\n----------\n\n");
         
     }
-    fprintf(yyout, "Spesa totale del albergo: %.2f\n\n", total_hotel);
+    fprintf(yyout, "Spesa totale del albergo: %.2f\n", total_hotel);
+    for(int i = 0; i < HASHSIZE; i++){
+        Room* room = hashtable_room[i];
+        if(room == NULL) continue;
+        free(room);
+    }
     fflush(yyout);
 }
