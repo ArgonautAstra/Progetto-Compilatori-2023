@@ -150,7 +150,7 @@ void print_tot()
 
         fprintf(yyout, "\n----------\n\n");
     }
-    fprintf(yyout, "Spesa totale del albergo: %.2f\n", total_hotel);
+    fprintf(yyout, "Guadagno totale del albergo: %.2f\n", total_hotel);
 
     while(linkedlist != NULL){
         Room* room = linkedlist;
