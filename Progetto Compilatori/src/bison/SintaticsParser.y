@@ -111,8 +111,9 @@ int main(int argc, char *argv[]){
     yyin = input_file;
     yyout = output_file;
     
-    if(yyparse() == 0){};
-    print_tot();
+    if(yyparse() == 0){
+        print_tot();
+    };
 
     fclose(input_file);
     fclose(output_file);
