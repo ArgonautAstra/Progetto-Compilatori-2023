@@ -5,4 +5,4 @@ Compilatori A.A 2022/2023 - Prof.ssa Mantaci
 
 Team: Andrea Spinelli, Marco Valenti
 
-![compilatori](https://github.com/ArgonautAstra/Progetto-Compilatori/assets/78497325/5ddfc061-882d-482a-829f-4539ff256c2e)
+![compilatori](https://github.com/ArgonautAstra/Progetto-Compilatori-2023/assets/78497325/3d8f5af9-470e-4a0a-9b39-d7e8757fd7c0)
